@@ -35,7 +35,8 @@ public class Bomb extends GameObject implements Destroyable {
     }
 
     public void explode() {
-        System.out.println("BOOM!");
+        bomb.delete();
+        player.decreaseActiveBombs();
     }
 
     @Override
