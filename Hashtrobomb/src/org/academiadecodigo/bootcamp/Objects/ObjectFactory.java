@@ -17,7 +17,7 @@ public class ObjectFactory {
     }
 
     public static Block createBlock(int col, int row, Field field){
-        int powerUpProbability = (int)Math.random()*100;
+        int powerUpProbability = (int)(Math.random()*100);
         boolean powerUp = (powerUpProbability <= 15) ? true : false;
 
         return new Block(col, row, field, powerUp);

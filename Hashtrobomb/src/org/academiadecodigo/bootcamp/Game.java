@@ -71,7 +71,7 @@ public class Game implements KeyboardHandler {
     public void init() {
         field = new Field();
         level = new Level(field);
-        level.level1();
+        level.level2();
         players[0] = ObjectFactory.createPlayer("Player 1", 0, 0, field, 0);
         players[1] = ObjectFactory.createPlayer("Player 2", 14, 14, field, 1);
     }
