@@ -15,56 +15,9 @@ public class Game implements KeyboardHandler {
     private Keyboard keyboard = new Keyboard(this);
 
     public Game() {
+        keyBinding();
 
-        KeyboardEvent up = new KeyboardEvent();
-        up.setKey(KeyboardEvent.KEY_W);
-        up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(up);
 
-        KeyboardEvent down = new KeyboardEvent();
-        down.setKey(KeyboardEvent.KEY_S);
-        down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(down);
-
-        KeyboardEvent left = new KeyboardEvent();
-        left.setKey(KeyboardEvent.KEY_A);
-        left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(left);
-
-        KeyboardEvent right = new KeyboardEvent();
-        right.setKey(KeyboardEvent.KEY_D);
-        right.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(right);
-
-        KeyboardEvent space = new KeyboardEvent();
-        space.setKey(KeyboardEvent.KEY_SPACE);
-        space.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(space);
-
-        KeyboardEvent up1 = new KeyboardEvent();
-        up1.setKey(KeyboardEvent.KEY_UP);
-        up1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(up1);
-
-        KeyboardEvent down1 = new KeyboardEvent();
-        down1.setKey(KeyboardEvent.KEY_DOWN);
-        down1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(down1);
-
-        KeyboardEvent left1 = new KeyboardEvent();
-        left1.setKey(KeyboardEvent.KEY_LEFT);
-        left1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(left1);
-
-        KeyboardEvent right1 = new KeyboardEvent();
-        right1.setKey(KeyboardEvent.KEY_RIGHT);
-        right1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(right1);
-
-        KeyboardEvent l = new KeyboardEvent();
-        l.setKey(KeyboardEvent.KEY_L);
-        l.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(l);
 
     }
 
@@ -123,4 +76,57 @@ public class Game implements KeyboardHandler {
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
     }
+
+    public void keyBinding() {
+        KeyboardEvent up = new KeyboardEvent();
+        up.setKey(KeyboardEvent.KEY_W);
+        up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(up);
+
+        KeyboardEvent down = new KeyboardEvent();
+        down.setKey(KeyboardEvent.KEY_S);
+        down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(down);
+
+        KeyboardEvent left = new KeyboardEvent();
+        left.setKey(KeyboardEvent.KEY_A);
+        left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(left);
+
+        KeyboardEvent right = new KeyboardEvent();
+        right.setKey(KeyboardEvent.KEY_D);
+        right.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(right);
+
+        KeyboardEvent space = new KeyboardEvent();
+        space.setKey(KeyboardEvent.KEY_SPACE);
+        space.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(space);
+
+        KeyboardEvent up1 = new KeyboardEvent();
+        up1.setKey(KeyboardEvent.KEY_UP);
+        up1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(up1);
+
+        KeyboardEvent down1 = new KeyboardEvent();
+        down1.setKey(KeyboardEvent.KEY_DOWN);
+        down1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(down1);
+
+        KeyboardEvent left1 = new KeyboardEvent();
+        left1.setKey(KeyboardEvent.KEY_LEFT);
+        left1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(left1);
+
+        KeyboardEvent right1 = new KeyboardEvent();
+        right1.setKey(KeyboardEvent.KEY_RIGHT);
+        right1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(right1);
+
+        KeyboardEvent l = new KeyboardEvent();
+        l.setKey(KeyboardEvent.KEY_L);
+        l.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(l);
+    }
+
 }

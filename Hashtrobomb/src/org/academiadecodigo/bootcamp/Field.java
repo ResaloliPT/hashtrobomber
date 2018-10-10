@@ -10,6 +10,7 @@ public class Field {
     private int cellSize = 40;
     private Rectangle field;
 
+
     public Field(){
         field = new Rectangle(PADDING, PADDING, getWidth(), getHeight());
         field.setColor(Color.BLACK);
