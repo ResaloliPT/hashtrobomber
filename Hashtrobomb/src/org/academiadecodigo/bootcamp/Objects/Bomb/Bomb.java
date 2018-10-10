@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 
 public class Bomb extends GameObject implements Destroyable {
+
     private int power;
     private int timer = 3000;
     private Player player;
