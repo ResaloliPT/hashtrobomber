@@ -19,7 +19,7 @@ public class PowerUp extends GameObject implements Destroyable {
     }
 
     @Override
-    public boolean isDestroyed()pro {
+    public boolean isDestroyed() {
         return destroyed;
     }
 }
