@@ -25,7 +25,8 @@ public class Bomb extends GameObject implements Destroyable {
         bomb = new Picture(position.getX(), position.getY(), "resources/bomb1.png");
         bomb.draw();
 
-        TimerTask explode = new TimerTask() {
+        TimerTask explode;
+        explode = new TimerTask() {
             public void run() {
                 explode();
             }
