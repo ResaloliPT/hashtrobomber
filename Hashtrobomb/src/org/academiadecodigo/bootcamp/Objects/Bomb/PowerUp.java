@@ -13,7 +13,7 @@ public class PowerUp extends GameObject implements Destroyable {
 
     public PowerUp(int x, int y, Field field){
         position = new Position(x, y, field);
-        type = PowerUpTypes.values()[(int)Math.random() * PowerUpTypes.values().length];
+        type = PowerUpTypes.values()[(int)(Math.random() * PowerUpTypes.values().length)];
     }
 
     @Override
