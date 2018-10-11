@@ -1,18 +1,26 @@
 package org.academiadecodigo.bootcamp.Objects.Bomb;
 
 import org.academiadecodigo.bootcamp.Field;
+import org.academiadecodigo.bootcamp.Game;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
-import org.academiadecodigo.bootcamp.Position.Position;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Explosion extends GameObject {
 
     private Picture picture;
-    private int power;
 
-    public Explosion(int col, int row, int power, Field field) {
-       super(col, row, field);
-       this.power = power;
+    public Explosion(int col, int row, Field field) {
+        super(col, row, field);
+        picture = new Picture(position.getX(), position.getY(), "resources/Fireball.png");
+        picture.draw();
+        Game.gameObjects.add(this);
     }
 
+
+    public void erase() {
+        picture.delete();
+    }
 }
+
+
+

@@ -1,10 +1,7 @@
 package org.academiadecodigo.bootcamp.Objects;
 
-import javafx.geometry.Pos;
-import org.academiadecodigo.bootcamp.CollisionDetector;
 import org.academiadecodigo.bootcamp.Game;
 import org.academiadecodigo.bootcamp.Objects.Bomb.Bomb;
-import org.academiadecodigo.bootcamp.Objects.Bomb.Explosion;
 import org.academiadecodigo.bootcamp.Objects.walls.Block;
 import org.academiadecodigo.bootcamp.Objects.walls.Wall;
 import org.academiadecodigo.bootcamp.Position.Directions;
@@ -12,11 +9,9 @@ import org.academiadecodigo.bootcamp.Field;
 import org.academiadecodigo.bootcamp.Position.Position;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.util.List;
 
 public class Player extends GameObject implements Destroyable {
 
-    // Resource is for selecting images for different players!
     private String[] resource = {"resources/Player1.png", "resources/player2.png"};
     private int maxBombs = 2;
     private int bombPower = 1;
@@ -74,7 +69,7 @@ public class Player extends GameObject implements Destroyable {
         return false;
     }
 
-    public void increaseBombs() {
+    public void increaseBombs(){
         maxBombs++;
     }
 
@@ -116,6 +111,5 @@ public class Player extends GameObject implements Destroyable {
     public boolean isDestroyed() {
         return destroyed;
     }
-
 
 }

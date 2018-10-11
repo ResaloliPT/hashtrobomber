@@ -21,17 +21,17 @@ public class Game implements KeyboardHandler {
     public static List<GameObject> gameObjects = new LinkedList<>();
 
     public Game() {
-        keyBinding();
-
-
+        init();
     }
 
     public void init() {
+
         field = new Field();
         level = new Level(field);
         gameObjects = level.level2();
         players[0] = ObjectFactory.createPlayer("Player 1", 0, 0, field, 0);
         players[1] = ObjectFactory.createPlayer("Player 2", 14, 14, field, 1);
+        keyBinding();
     }
 
     public void start() {
