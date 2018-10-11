@@ -25,11 +25,11 @@ public class PlayerDetails {
         rectangle.fill();
 
         Text text0 = new Text(260, 15,playerName + "  BOMBS : " + nrOfBombs);
-        text0.setColor(Color.MAGENTA);
+        text0.setColor(Color.BLUE);
         text0.draw();
 
         Text text1 = new Text(385, 15, "POWER : " + bombsPower);
-        text1.setColor(Color.MAGENTA);
+        text1.setColor(Color.BLUE);
         text1.draw();
 
 
@@ -42,11 +42,11 @@ public class PlayerDetails {
         rectangle.fill();
 
         Text text2 = new Text(260, 660,playerName + "  BOMBS : " + nrOfBombs);
-        text2.setColor(Color.MAGENTA);
+        text2.setColor(Color.BLUE);
         text2.draw();
 
         Text text3 = new Text(385, 660, "POWER : " + bombsPower);
-        text3.setColor(Color.MAGENTA);
+        text3.setColor(Color.BLUE);
         text3.draw();
     }
 }
