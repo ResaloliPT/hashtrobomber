@@ -24,8 +24,9 @@ public class Block extends GameObject implements Destroyable {
     @Override
     public void destroy(){
         if(powerUp){
-            ObjectFactory.createPowerUp(position.getX(), position.getY(), position.getField());
+            ObjectFactory.createPowerUp(position.getCol(), position.getRow(), position.getField());
         }
+        block.delete();
         destroyed = true;
     }
 

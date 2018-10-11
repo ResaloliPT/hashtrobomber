@@ -10,6 +10,7 @@ public class PowerUp extends GameObject implements Destroyable {
     private Picture pwrUpSprite;
     private String[] resource = {"resources/fireball.png"};
 
+
     public PowerUp(int col, int row, Field field){
         super(col, row, field);
         type = PowerUpTypes.values()[(int)(Math.random() * PowerUpTypes.values().length)];
