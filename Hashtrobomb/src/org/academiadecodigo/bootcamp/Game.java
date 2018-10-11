@@ -17,6 +17,7 @@ public class Game implements KeyboardHandler {
     private Field field;
     private Level level;
     private Player[] players = new Player[2];
+    private PlayerDetails[] playerDetails = new PlayerDetails[2];
     private Keyboard keyboard = new Keyboard(this);
     public static List<GameObject> gameObjects = new LinkedList<>();
 
@@ -31,6 +32,10 @@ public class Game implements KeyboardHandler {
         gameObjects = level.level2();
         players[0] = ObjectFactory.createPlayer("Player 1", 0, 0, field, 0);
         players[1] = ObjectFactory.createPlayer("Player 2", 14, 14, field, 1);
+        playerDetails[0] = new PlayerDetails(players[0]);
+        playerDetails[0].updateP1Details();
+        playerDetails[1] = new PlayerDetails(players[1]);
+        playerDetails[1].updateP2Details();
         keyBinding();
     }
 

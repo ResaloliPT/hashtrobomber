@@ -2,40 +2,51 @@ package org.academiadecodigo.bootcamp;
 
 import org.academiadecodigo.bootcamp.Objects.Player;
 import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 public class PlayerDetails {
 
     private int nrOfBombs;
     private int bombsPower;
-    private String player1;
-    private String player2;
+    private String playerName;
 
     public PlayerDetails(Player player) {
         this.nrOfBombs = player.getMaxBombs();
         this.bombsPower = player.getBombPower();
-        this.player1 = player.getName();
-        this.player2 = player.getName();
+        this.playerName = player.getName();
 
-        int v;
-        int v1;
+    }
 
-        if (player1.equals("Player1")) {
-            v = 20;
-            v1 = 20;
+    public void updateP1Details() {
 
-        } else {
-            v = 60;
-            v1 = 20;
+        Rectangle rectangle = new Rectangle(255,15,199,18);
+        rectangle.setColor(Color.WHITE);
+        rectangle.fill();
 
-        }
+        Text text0 = new Text(260, 15,playerName + "  BOMBS : " + nrOfBombs);
+        text0.setColor(Color.MAGENTA);
+        text0.draw();
 
-        Text text = new Text(v, v1, "BOMBS : " + nrOfBombs);
-        text.setColor(Color.MAGENTA);
-        text.draw();
+        Text text1 = new Text(385, 15, "POWER : " + bombsPower);
+        text1.setColor(Color.MAGENTA);
+        text1.draw();
 
 
     }
 
+    public void updateP2Details() {
 
+        Rectangle rectangle = new Rectangle(255,660,199,18);
+        rectangle.setColor(Color.WHITE);
+        rectangle.fill();
+
+        Text text2 = new Text(260, 660,playerName + "  BOMBS : " + nrOfBombs);
+        text2.setColor(Color.MAGENTA);
+        text2.draw();
+
+        Text text3 = new Text(385, 660, "POWER : " + bombsPower);
+        text3.setColor(Color.MAGENTA);
+        text3.draw();
+    }
 }

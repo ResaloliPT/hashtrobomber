@@ -17,6 +17,7 @@ public class Player extends GameObject implements Destroyable {
     private int bombPower = 2;
     private int activeBombs = 0;
     private Picture character;
+    private String name;
 
 
     public Player(String name, int col, int row, Field field, int type) {
@@ -24,6 +25,7 @@ public class Player extends GameObject implements Destroyable {
         super(col, row, field);
         character = new Picture(position.getX(), position.getY(), resource[type]);
         character.draw();
+        this.name = name;
 
     }
 
@@ -100,6 +102,14 @@ public class Player extends GameObject implements Destroyable {
 
     public int getBombPower(){
         return bombPower;
+    }
+
+    public int getMaxBombs() {
+        return maxBombs;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
