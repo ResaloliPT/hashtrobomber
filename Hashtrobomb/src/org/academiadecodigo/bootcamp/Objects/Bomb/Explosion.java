@@ -11,7 +11,7 @@ public class Explosion extends GameObject {
 
     public Explosion(int col, int row, Field field) {
         super(col, row, field);
-        picture = new Picture(position.getX(), position.getY(), "resources/Fireball.png");
+        picture = new Picture(position.getX(), position.getY(), "resources/explosion_center.png");
         picture.draw();
         Game.gameObjects.add(this);
     }

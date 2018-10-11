@@ -12,16 +12,18 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Player extends GameObject implements Destroyable {
 
-    private String[] resource = {"resources/Player1.png", "resources/player2.png"};
+    private String[] resource = {"resources/player1_down.png", "resources/player2_down.png"};
     private int maxBombs = 2;
     private int bombPower = 1;
     private int activeBombs = 0;
     private Picture character;
+    private String name;
 
 
     public Player(String name, int col, int row, Field field, int type) {
 
         super(col, row, field);
+        this.name = name;
         character = new Picture(position.getX(), position.getY(), resource[type]);
         character.draw();
 
@@ -35,27 +37,39 @@ public class Player extends GameObject implements Destroyable {
 
         switch (direction) {
             case UP:
-                if (position.getRow() != 0) {
-                    character.translate(0, -position.getField().getCellSize());
+                if (position.getRow() != position.getField().getMinRow()) {
+                    character.delete();
                     position.setRow(position.getRow() - 1);
+                    character.load("resources/"+this.name+"_up.png");
+                    character.translate(0, -position.getField().getCellSize());
+                    character.draw();
                 }
                 break;
             case DOWN:
-                if (position.getRow() != 14) {
-                    character.translate(0, position.getField().getCellSize());
+                if (position.getRow() != position.getField().getMaxRow()) {
+                    character.delete();
                     position.setRow(position.getRow() + 1);
+                    character.load("resources/"+this.name+"_down.png");
+                    character.translate(0, position.getField().getCellSize());
+                    character.draw();
                 }
                 break;
             case LEFT:
-                if (position.getCol() != 0) {
-                    character.translate(-position.getField().getCellSize(), 0);
+                if (position.getCol() != position.getField().getMinCol()) {
+                    character.delete();
                     position.setCol(position.getCol() - 1);
+                    character.load("resources/"+this.name+"_left.png");
+                    character.translate(-position.getField().getCellSize(), 0);
+                    character.draw();
                 }
                 break;
             case RIGHT:
-                if (position.getCol() != 14) {
-                    character.translate(position.getField().getCellSize(), 0);
+                if (position.getCol() != position.getField().getMaxCol()) {
+                    character.delete();
                     position.setCol(position.getCol() + 1);
+                    character.load("resources/"+this.name+"_right.png");
+                    character.translate(position.getField().getCellSize(), 0);
+                    character.draw();
                 }
                 break;
         }

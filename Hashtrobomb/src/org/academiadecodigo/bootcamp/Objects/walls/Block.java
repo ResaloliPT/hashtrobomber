@@ -15,7 +15,7 @@ public class Block extends GameObject implements Destroyable {
         super(col, row, field);
         this.powerUp = powerUp;
 
-        block = new Picture(position.getX(), position.getY(), "resources/RTS_Crate_0.png");
+        block = new Picture(position.getX(), position.getY(), "resources/block.png");
         block.draw();
         powerUpObj = new Picture(position.getX(),position.getY(),"resources/fireball.png");
 

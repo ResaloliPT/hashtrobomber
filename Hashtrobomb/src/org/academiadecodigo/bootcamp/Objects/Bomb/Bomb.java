@@ -28,7 +28,7 @@ public class Bomb extends GameObject implements Destroyable {
         this.power = power;
         this.player = player;
 
-        bomb = new Picture(position.getX(), position.getY(), "resources/bomb1.png");
+        bomb = new Picture(position.getX(), position.getY(), "resources/bomb.png");
         bomb.draw();
         timerTask();
 

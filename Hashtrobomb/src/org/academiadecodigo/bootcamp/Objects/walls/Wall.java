@@ -11,7 +11,7 @@ public class Wall extends GameObject {
     public Wall (int col, int row, Field field){
 
         super(col, row, field);
-        wallSprite = new Picture(position.getX(), position.getY(), "resources/Preview_154.png");
+        wallSprite = new Picture(position.getX(), position.getY(), "resources/wall.png");
         wallSprite.draw();
 
     }

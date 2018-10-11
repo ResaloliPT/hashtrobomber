@@ -29,8 +29,8 @@ public class Game implements KeyboardHandler {
         field = new Field();
         level = new Level(field);
         gameObjects = level.level2();
-        players[0] = ObjectFactory.createPlayer("Player 1", 0, 0, field, 0);
-        players[1] = ObjectFactory.createPlayer("Player 2", 14, 14, field, 1);
+        players[0] = ObjectFactory.createPlayer("player1", 0, 0, field, 0);
+        players[1] = ObjectFactory.createPlayer("player2", 14, 14, field, 1);
         keyBinding();
     }
 
