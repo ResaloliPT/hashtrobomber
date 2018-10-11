@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.Objects.walls;
 
 import org.academiadecodigo.bootcamp.Field;
+import org.academiadecodigo.bootcamp.Game;
 import org.academiadecodigo.bootcamp.Objects.Destroyable;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
@@ -17,17 +18,18 @@ public class Block extends GameObject implements Destroyable {
 
         block = new Picture(position.getX(), position.getY(), "resources/RTS_Crate_0.png");
         block.draw();
-        powerUpObj = new Picture(position.getX(),position.getY(),"resources/fireball.png");
+        //powerUpObj = new Picture(position.getX(),position.getY(),"resources/fireball.png");
 
     }
 
     @Override
     public void destroy(){
         if(powerUp){
-            ObjectFactory.createPowerUp(position.getCol(), position.getRow(), position.getField());
+            ObjectFactory.createPowerUp(this.position.getCol(), this.position.getRow(), position.getField());
         }
         block.delete();
         destroyed = true;
+        Game.gameObjects.remove(this);
     }
 
     @Override
