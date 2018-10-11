@@ -4,15 +4,20 @@ import org.academiadecodigo.bootcamp.Field;
 import org.academiadecodigo.bootcamp.Objects.Destroyable;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Position.Position;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class PowerUp extends GameObject implements Destroyable {
     private PowerUpTypes type;
-    private Picture firePower;
+    private Rectangle powerup;
     private String[] resource = {"resources/fireball.png"};
 
-    public PowerUp(int x, int y, Field field){
-        position = new Position(x, y, field);
+    public PowerUp(int col, int row, Field field){
+        position = new Position(col, row, field);
+
+        powerup = new Rectangle(position.getX(), position.getY(), field.getCellSize(), field.getCellSize());
+        powerup.setColor(Color.BLUE);
+        powerup.fill();
         type = PowerUpTypes.values()[(int)(Math.random() * PowerUpTypes.values().length)];
     }
 
