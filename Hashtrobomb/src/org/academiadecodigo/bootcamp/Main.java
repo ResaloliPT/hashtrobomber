@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp;
 
 import org.academiadecodigo.bootcamp.Menu.Menu;
 import org.academiadecodigo.bootcamp.Menu.MenuInstructions;
+import org.academiadecodigo.bootcamp.Music.Music;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,7 +10,9 @@ public class Main {
 
         Menu menu = new Menu();
 
+
         try {
+
             menu.start();
         } catch (InterruptedException e) {
 
@@ -17,12 +20,12 @@ public class Main {
 
         MenuInstructions inst = new MenuInstructions();
         try {
+
             inst.start();
-        }catch (InterruptedException i){
+
+        } catch (InterruptedException i) {
 
         }
-
-
         Game game = new Game();
         game.start();
     }

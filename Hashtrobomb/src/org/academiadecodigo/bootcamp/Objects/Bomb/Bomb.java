@@ -2,11 +2,11 @@ package org.academiadecodigo.bootcamp.Objects.Bomb;
 
 import org.academiadecodigo.bootcamp.Field;
 import org.academiadecodigo.bootcamp.Game;
+import org.academiadecodigo.bootcamp.Menu.BombMusic;
 import org.academiadecodigo.bootcamp.Objects.Destroyable;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
 import org.academiadecodigo.bootcamp.Objects.Player;
-import org.academiadecodigo.bootcamp.Position.Directions;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.LinkedList;
@@ -17,15 +17,18 @@ import java.util.TimerTask;
 
 public class Bomb extends GameObject implements Destroyable {
 
-    private final int EXPLOSION_TIMER = 750;
+    private final int DELETE_EXPLOSION_TIMER = 750;
     private int power;
-    private int timer = 3000;
+    private final int EXPLOSION_TIMER = 3000;
+    private final int SOUND_TIMER = 2000;
     private Player player;
     private Picture bomb;
     private List<Explosion> explosionList = new LinkedList<>();
 
+    BombMusic bombMusic = new BombMusic();
 
     public Bomb(int col, int row, Player player, int power, Field field) {
+
 
         super(col, row, field);
         this.power = power;
@@ -33,7 +36,22 @@ public class Bomb extends GameObject implements Destroyable {
 
         bomb = new Picture(position.getX(), position.getY(), "resources/bomb1.png");
         bomb.draw();
+        bombMusicTimer();
         timerTask();
+
+
+
+    }
+
+    public void bombMusicTimer() {
+
+        TimerTask explode = new TimerTask() {
+            public void run() {
+                bombMusic.startMusic();
+            }
+        };
+        Timer trigger = new Timer();
+        trigger.schedule(explode, SOUND_TIMER);
 
 
     }
@@ -46,15 +64,15 @@ public class Bomb extends GameObject implements Destroyable {
             }
         };
         Timer trigger = new Timer();
-        trigger.schedule(explode, timer);
+        trigger.schedule(explode, EXPLOSION_TIMER);
     }
 
     public void explode() {
 
         int col = position.getCol();
         int row = position.getRow();
-
         bomb.delete();
+
 
 
         explosionList.add(ObjectFactory.createExplosion(col, row, position.getField()));
@@ -75,7 +93,7 @@ public class Bomb extends GameObject implements Destroyable {
 
         Game.gameObjects.remove(this);
         try {
-            Thread.sleep(EXPLOSION_TIMER);
+            Thread.sleep(DELETE_EXPLOSION_TIMER);
         } catch (InterruptedException ex) {
 
         }
