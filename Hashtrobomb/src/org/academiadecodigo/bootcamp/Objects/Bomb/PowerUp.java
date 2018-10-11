@@ -9,6 +9,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class PowerUp extends GameObject implements Destroyable {
     private PowerUpTypes type;
+<<<<<<< HEAD
     private Rectangle powerup;
     private String[] resource = {"resources/fireball.png"};
 
@@ -18,7 +19,29 @@ public class PowerUp extends GameObject implements Destroyable {
         powerup = new Rectangle(position.getX(), position.getY(), field.getCellSize(), field.getCellSize());
         powerup.setColor(Color.BLUE);
         powerup.fill();
+=======
+    private Picture powerUp;
+    private String[] resource = {"resources/fireball.png", "resources/fireball.png"};
+
+    public PowerUp(int col, int row, Field field){
+        position = new Position(col, row, field);
+>>>>>>> 1f08e6124e7331e03042650bee00825478041060
         type = PowerUpTypes.values()[(int)(Math.random() * PowerUpTypes.values().length)];
+        if(type == PowerUpTypes.BOMB){
+            powerUp = new Picture(col,row,resource[1]);
+
+        } else {
+            powerUp = new Picture(col, row, resource[0]);
+
+        }
+        powerUp.draw();
+    }
+
+    public void initPowerUp(){
+
+        if(type == PowerUpTypes.BOMB){
+
+        }
     }
 
     @Override
