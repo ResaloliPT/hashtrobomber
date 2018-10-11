@@ -126,4 +126,7 @@ public class Player extends GameObject implements Destroyable {
         return destroyed;
     }
 
+    public int getBombPower() {
+        return bombPower;
+    }
 }
