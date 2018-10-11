@@ -8,11 +8,11 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class PowerUp extends GameObject implements Destroyable {
     private PowerUpTypes type;
-    private Picture firePower;
+    private Picture pwrUpSprite;
     private String[] resource = {"resources/fireball.png"};
 
-    public PowerUp(int x, int y, Field field){
-        position = new Position(x, y, field);
+    public PowerUp(int col, int row, Field field){
+        super(col, row, field);
         type = PowerUpTypes.values()[(int)(Math.random() * PowerUpTypes.values().length)];
     }
 

@@ -18,7 +18,6 @@ public class Player extends GameObject implements Destroyable {
 
     // Resource is for selecting images for different players!
     private String[] resource = {"resources/Player1.png", "resources/player2.png"};
-    private String name;
     private int maxBombs = 2;
     private int bombPower = 1;
     private int activeBombs = 0;
@@ -26,9 +25,8 @@ public class Player extends GameObject implements Destroyable {
 
 
     public Player(String name, int col, int row, Field field, int type) {
-        name = name;
-        position = new Position(col, row, field);
 
+        super(col, row, field);
         character = new Picture(position.getX(), position.getY(), resource[type]);
         character.draw();
 
@@ -76,12 +74,6 @@ public class Player extends GameObject implements Destroyable {
         return false;
     }
 
-    public void returningBomb() {
-        if (activeBombs > 0) {
-            activeBombs--;
-        }
-    }
-
     public void increaseBombs() {
         maxBombs++;
     }
@@ -89,7 +81,6 @@ public class Player extends GameObject implements Destroyable {
     public void increasePower() {
         bombPower++;
     }
-
 
     public boolean isMovementAvailable(Position targetPosition) {
 
@@ -126,7 +117,5 @@ public class Player extends GameObject implements Destroyable {
         return destroyed;
     }
 
-    public int getBombPower() {
-        return bombPower;
-    }
+
 }

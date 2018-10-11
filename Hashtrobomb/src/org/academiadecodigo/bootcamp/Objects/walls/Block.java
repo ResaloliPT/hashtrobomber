@@ -7,18 +7,22 @@ import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
 import org.academiadecodigo.bootcamp.Position.Position;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+
+import javax.swing.*;
 
 public class Block extends GameObject implements Destroyable {
     private boolean powerUp;
-    private Rectangle block;
+    private Picture block;
 
-    public Block(int x, int y, Field field, boolean powerUp){
-        position = new Position(x, y, field);
+    public Block(int col, int row, Field field, boolean powerUp){
+        super(col, row, field);
         this.powerUp = powerUp;
 
-        block = new Rectangle(position.getX(), position.getY(), field.getCellSize(), field.getCellSize());
-        block.setColor(Color.ORANGE);
-        block.fill();
+        block = new Picture(position.getX(), position.getY(), "resources/RTS_Crate_0.png");
+        block.draw();
+        //block.setColor(Color.ORANGE);
+        //block.fill();
     }
 
     @Override

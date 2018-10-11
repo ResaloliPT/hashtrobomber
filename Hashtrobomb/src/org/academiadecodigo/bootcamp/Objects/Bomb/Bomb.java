@@ -20,9 +20,10 @@ public class Bomb extends GameObject implements Destroyable {
     private Picture bomb;
 
     public Bomb(int col, int row, Player player, int power, Field field) {
+
+        super(col, row, field);
         this.power = power;
         this.player = player;
-        position = new Position(col, row, field);
 
         bomb = new Picture(position.getX(), position.getY(), "resources/bomb1.png");
         bomb.draw();
