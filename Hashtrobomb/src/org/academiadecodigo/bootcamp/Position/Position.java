@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.Position;
 
+import javafx.geometry.Pos;
 import org.academiadecodigo.bootcamp.Field;
 
 public class Position {
@@ -53,7 +54,11 @@ public class Position {
         this.y = y;
     }
 
-    public boolean equals(Position pos){
-        return pos.getCol() == col && pos.getRow() == row;
+    @Override
+    public boolean equals(Object pos) {
+        if (pos instanceof Position) {
+            return ((Position) pos).getCol() == col && ((Position)pos).getRow() == row;
+        }
+        return false;
     }
 }
