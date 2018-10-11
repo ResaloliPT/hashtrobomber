@@ -1,13 +1,22 @@
 package org.academiadecodigo.bootcamp.Objects;
 
+import javafx.geometry.Pos;
+import org.academiadecodigo.bootcamp.CollisionDetector;
+import org.academiadecodigo.bootcamp.Game;
+import org.academiadecodigo.bootcamp.Objects.Bomb.Bomb;
+import org.academiadecodigo.bootcamp.Objects.Bomb.Explosion;
+import org.academiadecodigo.bootcamp.Objects.walls.Block;
+import org.academiadecodigo.bootcamp.Objects.walls.Wall;
 import org.academiadecodigo.bootcamp.Position.Directions;
 import org.academiadecodigo.bootcamp.Field;
 import org.academiadecodigo.bootcamp.Position.Position;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.List;
+
 public class Player extends GameObject implements Destroyable {
 
-            // Resource is for selecting images for different players!
+    // Resource is for selecting images for different players!
     private String[] resource = {"resources/Player1.png", "resources/player2.png"};
     private String name;
     private int maxBombs = 2;
@@ -16,11 +25,11 @@ public class Player extends GameObject implements Destroyable {
     private Picture character;
 
 
-    public Player(String name, int col, int row, Field field, int type){
+    public Player(String name, int col, int row, Field field, int type) {
         name = name;
-        position = new Position(col,row, field);
+        position = new Position(col, row, field);
 
-        character = new Picture(position.getX(),position.getY(), resource[type]);
+        character = new Picture(position.getX(), position.getY(), resource[type]);
         character.draw();
 
     }
@@ -29,29 +38,29 @@ public class Player extends GameObject implements Destroyable {
         this.activeBombs--;
     }
 
-    public void move(Directions direction){
+    public void move(Directions direction) {
 
-        switch (direction){
+        switch (direction) {
             case UP:
-                if(position.getRow() != 0) {
+                if (position.getRow() != 0) {
                     character.translate(0, -position.getField().getCellSize());
                     position.setRow(position.getRow() - 1);
                 }
                 break;
             case DOWN:
-                if(position.getRow() != 14) {
+                if (position.getRow() != 14) {
                     character.translate(0, position.getField().getCellSize());
                     position.setRow(position.getRow() + 1);
                 }
                 break;
             case LEFT:
-                if(position.getCol() != 0) {
+                if (position.getCol() != 0) {
                     character.translate(-position.getField().getCellSize(), 0);
                     position.setCol(position.getCol() - 1);
                 }
                 break;
             case RIGHT:
-                if(position.getCol() != 14) {
+                if (position.getCol() != 14) {
                     character.translate(position.getField().getCellSize(), 0);
                     position.setCol(position.getCol() + 1);
                 }
@@ -59,27 +68,53 @@ public class Player extends GameObject implements Destroyable {
         }
     }
 
-    public void dropBomb(){
-        if(activeBombs < maxBombs) {
-            ObjectFactory.createBomb(position.getCol(), position.getRow(), this, bombPower, position.getField());
+    public boolean dropBomb() {
+        if (activeBombs < maxBombs) {
             activeBombs++;
+            return true;
         }
+        return false;
     }
 
     public void returningBomb() {
-        if(activeBombs > 0){
+        if (activeBombs > 0) {
             activeBombs--;
         }
     }
 
-    public void increaseBombs(){
+    public void increaseBombs() {
         maxBombs++;
     }
 
-    public void increasePower(){
+    public void increasePower() {
         bombPower++;
     }
 
+
+    public boolean isMovementAvailable(Position targetPosition) {
+
+        GameObject obj = null;
+
+        for (GameObject gameObject : Game.gameObjects) {
+
+            if (targetPosition.equals(gameObject.getPosition())) {
+                obj = gameObject;
+            }
+        }
+        if (obj == null) {
+            return true;
+        }
+
+        return !(obj instanceof Block ||
+                obj instanceof Wall ||
+                obj instanceof Bomb);
+
+    }
+
+
+    public int getBombPower(){
+        return bombPower;
+    }
 
     @Override
     public void destroy() {

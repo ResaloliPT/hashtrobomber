@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.Objects.Bomb;
 
 import org.academiadecodigo.bootcamp.Field;
+import org.academiadecodigo.bootcamp.Game;
 import org.academiadecodigo.bootcamp.Objects.Destroyable;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.Player;
@@ -37,6 +38,7 @@ public class Bomb extends GameObject implements Destroyable {
     public void explode() {
         bomb.delete();
         player.decreaseActiveBombs();
+        Game.gameObjects.remove(this);
     }
 
     @Override

@@ -6,8 +6,9 @@ public abstract class GameObject {
     protected Position position;
     protected boolean destroyed;
 
-    public boolean checkCollision(){
-        return false;
+    public boolean checkCollision(GameObject gameObject){
+
+        return this.position.equals(gameObject.position);
     }
 
     public Position getPosition(){
