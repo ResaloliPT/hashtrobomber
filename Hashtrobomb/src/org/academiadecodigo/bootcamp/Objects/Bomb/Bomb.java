@@ -6,6 +6,7 @@ import org.academiadecodigo.bootcamp.Objects.Destroyable;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
 import org.academiadecodigo.bootcamp.Objects.Player;
+import org.academiadecodigo.bootcamp.Position.Directions;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.LinkedList;
@@ -21,7 +22,11 @@ public class Bomb extends GameObject implements Destroyable {
     private int timer = 3000;
     private Player player;
     private Picture bomb;
+<<<<<<< HEAD
     private List<Explosion> explosion = new LinkedList<>();
+=======
+    private List<Explosion> explosionList = new LinkedList<>();
+>>>>>>> 0aba52c3b5ee23a61b8eaf10af6e78d2eba93b6f
 
 
     public Bomb(int col, int row, Player player, int power, Field field) {
@@ -56,6 +61,7 @@ public class Bomb extends GameObject implements Destroyable {
         bomb.delete();
         Game.gameObjects.remove(this);
 
+<<<<<<< HEAD
         //explosion = new Explosion[1 + 4 * power];
 
         explosion.add(ObjectFactory.createExplosion(col, row, position.getField()));
@@ -65,21 +71,43 @@ public class Bomb extends GameObject implements Destroyable {
         for (int i = 1; i <= power; i++) {
 
             explosion.add(ObjectFactory.createExplosion(col + i, row, position.getField()));
+=======
+
+        explosionList.add(ObjectFactory.createExplosion(col, row, position.getField()));
+
+        for (int i = 1; i <= power; i++) {
+            explosionList.add(ObjectFactory.createExplosion(col + i, row, position.getField()));
+        }
+        for (int i = 1; i <= power; i++) {
+            explosionList.add(ObjectFactory.createExplosion(col - i, row, position.getField()));
+        }
+        for (int i = 1; i <= power; i++) {
+            explosionList.add(ObjectFactory.createExplosion(col, row + i, position.getField()));
+>>>>>>> 0aba52c3b5ee23a61b8eaf10af6e78d2eba93b6f
+        }
+        for (int i = 1; i <= power; i++) {
+            explosionList.add(ObjectFactory.createExplosion(col, row - i, position.getField()));
         }
 
 
+<<<<<<< HEAD
+
+=======
+        Game.gameObjects.remove(this);
+>>>>>>> 0aba52c3b5ee23a61b8eaf10af6e78d2eba93b6f
         try {
             Thread.sleep(EXPLOSION_TIMER);
-        } catch (InterruptedException ex){
+        } catch (InterruptedException ex) {
 
         }
 
-        for(Explosion ex: explosion) {
+        for (Explosion ex : explosionList) {
             ex.erase();
         }
 
         player.decreaseActiveBombs();
     }
+
 
     @Override
     public void destroy() {
