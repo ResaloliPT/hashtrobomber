@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp;
 
+import org.academiadecodigo.bootcamp.Objects.Bomb.PowerUp;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
 import org.academiadecodigo.bootcamp.Objects.Player;
@@ -49,21 +50,25 @@ public class Game implements KeyboardHandler {
 
         switch (e.getKey()) {
             case KeyboardEvent.KEY_W:
+                players[0].setCharacter("resources/player1_up.png");
                 if (players[0].isMovementAvailable(new Position(currentCol_p1, currentRow_p1 - 1, field))) {
                     players[0].move(Directions.UP);
                 }
                 break;
             case KeyboardEvent.KEY_S:
+                players[0].setCharacter("resources/player1_down.png");
                 if (players[0].isMovementAvailable(new Position(currentCol_p1, currentRow_p1 + 1, field))) {
                     players[0].move(Directions.DOWN);
                 }
                 break;
             case KeyboardEvent.KEY_A:
+                players[0].setCharacter("resources/player1_left.png");
                 if (players[0].isMovementAvailable(new Position(currentCol_p1 - 1, currentRow_p1, field))) {
                     players[0].move(Directions.LEFT);
                 }
                 break;
             case KeyboardEvent.KEY_D:
+                players[0].setCharacter("resources/player1_right.png");
                 if (players[0].isMovementAvailable(new Position(currentCol_p1 + 1, currentRow_p1, field))) {
                     players[0].move(Directions.RIGHT);
                 }
@@ -75,21 +80,25 @@ public class Game implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_UP:
+                players[1].setCharacter("resources/player2_up.png");
                 if (players[1].isMovementAvailable(new Position(currentCol_p2, currentRow_p2 - 1, field))) {
                     players[1].move(Directions.UP);
                 }
                 break;
             case KeyboardEvent.KEY_DOWN:
+                players[1].setCharacter("resources/player2_down.png");
                 if (players[1].isMovementAvailable(new Position(currentCol_p2, currentRow_p2 + 1, field))) {
                     players[1].move(Directions.DOWN);
                 }
                 break;
             case KeyboardEvent.KEY_LEFT:
+                players[1].setCharacter("resources/player2_left.png");
                 if (players[1].isMovementAvailable(new Position(currentCol_p2 - 1, currentRow_p2, field))) {
                     players[1].move(Directions.LEFT);
                 }
                 break;
             case KeyboardEvent.KEY_RIGHT:
+                players[1].setCharacter("resources/player2_right.png");
                 if (players[1].isMovementAvailable(new Position(currentCol_p2 + 1, currentRow_p2, field))) {
 
                     players[1].move(Directions.RIGHT);
@@ -159,6 +168,18 @@ public class Game implements KeyboardHandler {
         l.setKey(KeyboardEvent.KEY_L);
         l.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(l);
+    }
+
+    public static GameObject objectAtPos(int col, int row, Field field){
+
+        Position position = new Position(col, row, field);
+
+        for(GameObject object : gameObjects){
+            if(position.equals(object.getPosition())){
+                return object;
+            }
+        }
+        return null;
     }
 
 }

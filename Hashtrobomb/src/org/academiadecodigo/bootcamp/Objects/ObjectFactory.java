@@ -33,7 +33,7 @@ public class ObjectFactory {
         return new Bomb(col, row, player, power, field);
     }
 
-    public static Explosion createExplosion(int col, int row, Field field) {
-        return new Explosion(col, row, field);
+    public static Explosion createExplosion(int col, int row, Field field, String sprite) {
+        return new Explosion(col, row, field, sprite);
     }
 }

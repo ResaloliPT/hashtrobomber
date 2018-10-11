@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.Menu;
 
+import org.academiadecodigo.bootcamp.Music.Music;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -18,6 +19,7 @@ public class MenuInstructions implements KeyboardHandler {
     private Picture two;
     private Picture one;
 
+    Music music = new Music();
 
     public MenuInstructions() {
         inst = new Picture(PADDING, PADDING, resource[0]);
@@ -26,10 +28,10 @@ public class MenuInstructions implements KeyboardHandler {
         two = new Picture(PADDING, PADDING, resource[2]);
         three = new Picture(PADDING, PADDING, resource[3]);
 
-        KeyboardEvent g = new KeyboardEvent();
-        g.setKey(KeyboardEvent.KEY_SPACE);
-        g.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(g);
+        KeyboardEvent startGame = new KeyboardEvent();
+        startGame.setKey(KeyboardEvent.KEY_SPACE);
+        startGame.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(startGame);
     }
 
 
@@ -40,9 +42,11 @@ public class MenuInstructions implements KeyboardHandler {
             inst.grow(0, 0);
         }
 
-        while(exitInst){
+        while (exitInst) {
 
             inst.delete();
+
+            music.startMusic();
 
             three.draw();
             Thread.sleep(600);
@@ -61,7 +65,6 @@ public class MenuInstructions implements KeyboardHandler {
             one.delete();
             break;
         }
-
 
 
     }
