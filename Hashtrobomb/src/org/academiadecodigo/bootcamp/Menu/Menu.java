@@ -18,9 +18,8 @@ public class Menu implements KeyboardHandler {
 
     public Menu() {
         bg = new Picture(PADDING, PADDING, resource[0]);
-        bg.draw();
         play = new Picture(140, 300, resource[1]);
-        play.draw();
+
 
         KeyboardEvent g = new KeyboardEvent();
         g.setKey(KeyboardEvent.KEY_SPACE);

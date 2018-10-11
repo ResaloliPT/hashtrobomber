@@ -14,7 +14,7 @@ public class Player extends GameObject implements Destroyable {
 
     private String[] resource = {"resources/Player1.png", "resources/player2.png"};
     private int maxBombs = 2;
-    private int bombPower = 2;
+    private int bombPower = 3;
     private int activeBombs = 0;
     private Picture character;
     private String name;
