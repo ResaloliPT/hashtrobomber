@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp;
 
+import org.academiadecodigo.bootcamp.Objects.Bomb.PowerUp;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
 import org.academiadecodigo.bootcamp.Objects.Player;
@@ -159,6 +160,18 @@ public class Game implements KeyboardHandler {
         l.setKey(KeyboardEvent.KEY_L);
         l.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(l);
+    }
+
+    public static GameObject objectAtPos(int col, int row, Field field){
+
+        Position position = new Position(col, row, field);
+
+        for(GameObject object : gameObjects){
+            if(position.equals(object.getPosition())){
+                return object;
+            }
+        }
+        return null;
     }
 
 }

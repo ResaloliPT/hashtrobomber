@@ -19,4 +19,6 @@ public abstract class GameObject {
     public Position getPosition(){
         return position;
     }
+
+    //public abstract void delete();
 }

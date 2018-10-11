@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.Objects.Bomb;
 
+import org.academiadecodigo.bootcamp.CollisionDetector;
 import org.academiadecodigo.bootcamp.Field;
 import org.academiadecodigo.bootcamp.Game;
 import org.academiadecodigo.bootcamp.Menu.BombMusic;
@@ -7,7 +8,9 @@ import org.academiadecodigo.bootcamp.Objects.Destroyable;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
 import org.academiadecodigo.bootcamp.Objects.Player;
+import org.academiadecodigo.bootcamp.Objects.walls.Wall;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +31,6 @@ public class Bomb extends GameObject implements Destroyable {
     BombMusic bombMusic = new BombMusic();
 
     public Bomb(int col, int row, Player player, int power, Field field) {
-
 
         super(col, row, field);
         this.power = power;
@@ -56,6 +58,10 @@ public class Bomb extends GameObject implements Destroyable {
 
     }
 
+    public void delete() {
+        Game.gameObjects.remove(this);
+        bomb.delete();
+    }
 
     public void timerTask() {
         TimerTask explode = new TimerTask() {
@@ -71,27 +77,71 @@ public class Bomb extends GameObject implements Destroyable {
 
         int col = position.getCol();
         int row = position.getRow();
-        bomb.delete();
-
-
+        this.delete();
 
         explosionList.add(ObjectFactory.createExplosion(col, row, position.getField()));
 
         for (int i = 1; i <= power; i++) {
-            explosionList.add(ObjectFactory.createExplosion(col + i, row, position.getField()));
+            if (col + i <= Field.getMaxCol()) {
+                if (!CollisionDetector.checkCollision(col + i, row, position.getField())) {
+                    explosionList.add(ObjectFactory.createExplosion(col + i, row, position.getField()));
+                    continue;
+                }
+                if (!(Game.objectAtPos(col + i, row, position.getField()) instanceof Wall)) {
+                    explosionList.add(ObjectFactory.createExplosion(col + i, row, position.getField()));
+                    break;
+                }
+            }
+            break;
         }
         for (int i = 1; i <= power; i++) {
-            explosionList.add(ObjectFactory.createExplosion(col - i, row, position.getField()));
+            if (col - i >= Field.getMinCol()) {
+                if (!CollisionDetector.checkCollision(col - i, row, position.getField())) {
+                    explosionList.add(ObjectFactory.createExplosion(col - i, row, position.getField()));
+                    continue;
+                }
+                if (!(Game.objectAtPos(col - i, row, position.getField()) instanceof Wall)) {
+                    explosionList.add(ObjectFactory.createExplosion(col - i, row, position.getField()));
+                    break;
+                }
+            }
+            break;
         }
         for (int i = 1; i <= power; i++) {
-            explosionList.add(ObjectFactory.createExplosion(col, row + i, position.getField()));
+            if (row + i <= Field.getMaxRow()) {
+                if (!CollisionDetector.checkCollision(col, row + i, position.getField())) {
+                    explosionList.add(ObjectFactory.createExplosion(col, row + i, position.getField()));
+                    continue;
+                }
+                if (!(Game.objectAtPos(col, row + i, position.getField()) instanceof Wall)) {
+                    explosionList.add(ObjectFactory.createExplosion(col, row + i, position.getField()));
+                    break;
+                }
+            }
+            break;
         }
         for (int i = 1; i <= power; i++) {
-            explosionList.add(ObjectFactory.createExplosion(col, row - i, position.getField()));
+            if (row - i >= Field.getMinRow()) {
+                if (!CollisionDetector.checkCollision(col, row - i, position.getField()) && row - i >= Field.getMinRow()) {
+                    explosionList.add(ObjectFactory.createExplosion(col, row - i, position.getField()));
+                    continue;
+                }
+                if (!(Game.objectAtPos(col, row - i, position.getField()) instanceof Wall)) {
+                    explosionList.add(ObjectFactory.createExplosion(col, row - i, position.getField()));
+                    break;
+                }
+            }
+            break;
+        }
+
+        for (Explosion explosion : explosionList) {
+            GameObject obj = CollisionDetector.checkCollision(explosion);
+            if (CollisionDetector.checkCollision(explosion) instanceof Destroyable) {
+                ((Destroyable) obj).destroy();
+            }
         }
 
 
-        Game.gameObjects.remove(this);
         try {
             Thread.sleep(DELETE_EXPLOSION_TIMER);
         } catch (InterruptedException ex) {
