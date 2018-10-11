@@ -19,6 +19,7 @@ public class Explosion extends GameObject {
 
     public void erase() {
         picture.delete();
+        Game.gameObjects.remove(this);
     }
 }
 
