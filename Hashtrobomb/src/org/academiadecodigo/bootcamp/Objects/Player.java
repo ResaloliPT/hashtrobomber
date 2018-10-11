@@ -72,6 +72,10 @@ public class Player extends GameObject implements Destroyable {
         }
     }
 
+    public int getBombPower() {
+        return bombPower;
+    }
+    
     public void increaseBombs(){
         maxBombs++;
     }
