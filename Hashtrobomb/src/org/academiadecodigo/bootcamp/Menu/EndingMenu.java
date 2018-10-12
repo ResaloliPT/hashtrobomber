@@ -4,22 +4,17 @@ import org.academiadecodigo.bootcamp.Objects.Player;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class End {
+public class EndingMenu {
 
-    private String[] resource = {"resources/end.png"};
+    private String[] resource = {"resources/gameOver.jpg"};
     private static final int PADDING = 10;
     private Picture end;
 
 
-    public End() {
+    public EndingMenu() {
         end = new Picture(PADDING, PADDING, resource[0]);
         end.draw();
 
-    }
-
-
-    public void end() {
-        end.draw();
     }
 
 }

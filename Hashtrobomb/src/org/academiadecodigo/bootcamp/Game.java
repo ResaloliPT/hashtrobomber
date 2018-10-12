@@ -1,6 +1,6 @@
 package org.academiadecodigo.bootcamp;
 
-import org.academiadecodigo.bootcamp.Objects.Bomb.PowerUp;
+import org.academiadecodigo.bootcamp.Menu.EndingMenu;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
 import org.academiadecodigo.bootcamp.Objects.Player;
@@ -17,6 +17,7 @@ import java.util.List;
 public class Game implements KeyboardHandler {
     private Field field;
     private Level level;
+    private PlayerDetails playerDetails;
     public static Player[] players = new Player[2];
     private Keyboard keyboard = new Keyboard(this);
     public static List<GameObject> gameObjects = new LinkedList<>();
@@ -29,28 +30,33 @@ public class Game implements KeyboardHandler {
         field = new Field();
         level = new Level(field);
         gameObjects = level.level2();
-        players[0] = ObjectFactory.createPlayer("player1", 0, 0, field, 0);
-        players[1] = ObjectFactory.createPlayer("player2", 14, 14, field, 1);
+        players[0] = ObjectFactory.createPlayer("Player 1", 0, 0, field, 0);
+        players[1] = ObjectFactory.createPlayer("Player 2", 14, 14, field, 1);
+        playerDetails = new PlayerDetails(players);
         keyBinding();
     }
 
-    public void start() {
+    public void start() throws InterruptedException{
 
         init();
-
-        while (!(players[0].isDestroyed() || players[1].isDestroyed())){
-
-            System.out.println("league of legends");
+        int P1Bombs = players[0].getMaxBombs();
+        int P2Bombs = players[1].getMaxBombs();
+        int P1Power = players[0].getBombPower();
+        int P2Power = players[1].getBombPower();
+        while (!players[0].isDestroyed() && !players[1].isDestroyed()) {
+            Thread.sleep(1);
         }
 
         end();
+
+        new EndingMenu();
 
     }
 
     @Override
     public void keyPressed(KeyboardEvent e) {
 
-        if(players.length == 2) {
+        if (players.length == 2) {
             int currentCol_p1 = players[0].getPosition().getCol();
             int currentRow_p1 = players[0].getPosition().getRow();
             int currentCol_p2 = players[1].getPosition().getCol();
@@ -200,19 +206,19 @@ public class Game implements KeyboardHandler {
         keyboard.addEventListener(l);
     }
 
-    public void end(){
+    public void end() {
 
         players = new Player[0];
         gameObjects.clear();
         field = new Field();
     }
 
-    public static GameObject objectAtPos(int col, int row, Field field){
+    public static GameObject objectAtPos(int col, int row, Field field) {
 
         Position position = new Position(col, row, field);
 
-        for(GameObject object : gameObjects){
-            if(position.equals(object.getPosition())){
+        for (GameObject object : gameObjects) {
+            if (position.equals(object.getPosition())) {
                 return object;
             }
         }

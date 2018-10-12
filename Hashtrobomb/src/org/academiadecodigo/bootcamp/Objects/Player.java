@@ -128,11 +128,16 @@ public class Player extends GameObject implements Destroyable {
         character.load(source);
     }
 
-    public String getName(){
-        return name;
-    }
     public int getBombPower(){
         return bombPower;
+    }
+
+    public int getMaxBombs() {
+        return maxBombs;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

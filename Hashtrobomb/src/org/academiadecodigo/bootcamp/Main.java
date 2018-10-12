@@ -27,6 +27,12 @@ public class Main {
             i.printStackTrace();
         }
         Game game = new Game();
-        game.start();
+
+        try {
+
+            game.start();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 }
