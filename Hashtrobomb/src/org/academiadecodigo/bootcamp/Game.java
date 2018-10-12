@@ -110,7 +110,18 @@ public class Game implements KeyboardHandler {
                     gameObjects.add(ObjectFactory.createBomb(currentCol_p2, currentRow_p2, players[1], players[1].getBombPower(), field));
                 }
                 break;
+            case KeyboardEvent.KEY_6:
+                players[1].destroy();
+
+                break;
+
+            case KeyboardEvent.KEY_7:
+                players[0].destroy();
+
+                break;
+
         }
+
     }
 
     @Override
@@ -143,6 +154,16 @@ public class Game implements KeyboardHandler {
         space.setKey(KeyboardEvent.KEY_SPACE);
         space.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(space);
+
+        KeyboardEvent special = new KeyboardEvent();
+        special.setKey(KeyboardEvent.KEY_6);
+        special.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(special);
+
+        KeyboardEvent special1 = new KeyboardEvent();
+        special1.setKey(KeyboardEvent.KEY_7);
+        special1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(special1);
 
         KeyboardEvent up1 = new KeyboardEvent();
         up1.setKey(KeyboardEvent.KEY_UP);
