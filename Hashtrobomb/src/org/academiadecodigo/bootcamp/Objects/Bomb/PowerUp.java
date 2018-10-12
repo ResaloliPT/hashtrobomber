@@ -7,10 +7,10 @@ import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class PowerUp extends GameObject implements Destroyable {
+
     private PowerUpTypes type;
     private Picture pwrUpSprite;
     private String[] resource = {"resources/powerup_power.png", "resources/powerup_bomb.png"};
-
 
     public PowerUp(int col, int row, Field field){
         super(col, row, field);
@@ -24,13 +24,9 @@ public class PowerUp extends GameObject implements Destroyable {
 
         if(type == PowerUpTypes.BOMB){
             pwrUpSprite = new Picture(position.getX(), position.getY(), resource[1]);
-
         } else {
             pwrUpSprite = new Picture(position.getX(), position.getY(), resource[0]);
-
         }
-
-
     }
 
     public PowerUpTypes getType() {

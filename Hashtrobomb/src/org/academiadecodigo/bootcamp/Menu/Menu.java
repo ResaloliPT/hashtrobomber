@@ -9,9 +9,9 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Menu implements KeyboardHandler {
 
-    private boolean startGame;
-    private String[] resource = {"resources/menu1.jpg", "resources/spacebar.png"};
     private static final int PADDING = 10;
+    private boolean startGame;
+    private String[] resource = {"resources/inicialMenu.jpg", "resources/spacebar.png"};
     private Picture bg;
     private Picture play;
     private Keyboard keyboard = new Keyboard(this);
@@ -19,7 +19,6 @@ public class Menu implements KeyboardHandler {
     public Menu() {
         bg = new Picture(PADDING, PADDING, resource[0]);
         play = new Picture(44, 650, resource[1]);
-
 
         KeyboardEvent g = new KeyboardEvent();
         g.setKey(KeyboardEvent.KEY_SPACE);
@@ -32,20 +31,22 @@ public class Menu implements KeyboardHandler {
 
         bg.draw();
         play.draw();
+
         while (!startGame) {
             play.grow(4, 6);
             Thread.sleep(300);
             play.grow(-4,-6);
             Thread.sleep(300);
         }
+
         play.delete();
         bg.delete();
     }
 
     @Override
     public void keyPressed(KeyboardEvent e) {
-        switch (e.getKey()) {
 
+        switch (e.getKey()) {
             case KeyboardEvent.KEY_SPACE:
                 startGame = true;
                 break;

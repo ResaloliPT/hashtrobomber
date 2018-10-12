@@ -10,9 +10,9 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class MenuInstructions implements KeyboardHandler {
 
-    private boolean exitInst;
-    private String[] resource = {"resources/inst.png", "resources/1.png", "resources/2.png", "resources/3.png",};
     private static final int PADDING = 10;
+    private boolean exitInst;
+    private String[] resource = {"resources/menuinstructions.jpg", "resources/1.jpg", "resources/2.jpg", "resources/3.jpg",};
     private Picture inst;
     private Keyboard keyboard = new Keyboard(this);
     private Picture three;
@@ -24,6 +24,7 @@ public class MenuInstructions implements KeyboardHandler {
     public MenuInstructions() {
         inst = new Picture(PADDING, PADDING, resource[0]);
         inst.draw();
+
         one = new Picture(PADDING, PADDING, resource[1]);
         two = new Picture(PADDING, PADDING, resource[2]);
         three = new Picture(PADDING, PADDING, resource[3]);
@@ -45,7 +46,6 @@ public class MenuInstructions implements KeyboardHandler {
         while (exitInst) {
 
             inst.delete();
-
             inGameMusic.startMusic();
 
             three.draw();
@@ -71,8 +71,8 @@ public class MenuInstructions implements KeyboardHandler {
 
     @Override
     public void keyPressed(KeyboardEvent i) {
-        switch (i.getKey()) {
 
+        switch (i.getKey()) {
             case KeyboardEvent.KEY_SPACE:
                 exitInst = true;
                 break;

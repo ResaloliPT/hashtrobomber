@@ -13,9 +13,11 @@ public class Explosion extends GameObject implements Destroyable {
 
     public Explosion(int col, int row, Field field, String sprite) {
         super(col, row, field);
+
         picture = new Picture(position.getX(), position.getY(), sprite);
         picture.draw();
         picture.grow(2,2);
+
         Game.gameObjects.add(this);
     }
 

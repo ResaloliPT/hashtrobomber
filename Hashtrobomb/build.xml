@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<project name="Hashtrobomb" default="jarfile">
+<project name="Hashtrobomber" default="jarfile">
 
     <!-- Initialize build properties  -->
     <target name="init" description="Initializes properties">
-        <property name="project.name" value="Hashtrobomb" />
+        <property name="project.name" value="Hashtrobomber" />
         <property name="src.dir" value="src" />
         <property name="main.class" value="org.academiadecodigo.bootcamp.Main" />
         <property name="build.dir" value="build" />
@@ -42,7 +42,7 @@
             </manifest>
             <zipgroupfileset dir="${lib.dir}" includes="*.jar"/>
             <fileset dir=".">
-                <include name="${resources.dir}/**" />
+                <include name="**/${resources.dir}/**" />
             </fileset>
         </jar>
     </target>

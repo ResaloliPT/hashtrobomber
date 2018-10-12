@@ -4,7 +4,6 @@ import org.academiadecodigo.bootcamp.Field;
 import org.academiadecodigo.bootcamp.Objects.Bomb.Bomb;
 import org.academiadecodigo.bootcamp.Objects.Bomb.Explosion;
 import org.academiadecodigo.bootcamp.Objects.Bomb.PowerUp;
-import org.academiadecodigo.bootcamp.Objects.Bomb.PowerUpTypes;
 import org.academiadecodigo.bootcamp.Objects.walls.Block;
 import org.academiadecodigo.bootcamp.Objects.walls.Wall;
 

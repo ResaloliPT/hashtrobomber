@@ -31,7 +31,6 @@ public class Bomb extends GameObject implements Destroyable {
     BombMusic bombMusic = new BombMusic();
 
     public Bomb(int col, int row, Player player, int power, Field field) {
-
         super(col, row, field);
         this.power = power;
         this.player = player;
@@ -68,18 +67,20 @@ public class Bomb extends GameObject implements Destroyable {
 
     public void explode() {
 
-
         int col = position.getCol();
         int row = position.getRow();
+
         String spriteFile;
         this.delete();
 
         explosionList.add(ObjectFactory.createExplosion(col, row, position.getField(), "resources/explosion_center.png"));
 
         for (int i = 1; i <= power; i++) {
+
             if (col + i <= Field.getMaxCol()) {
                 GameObject obj = Game.objectAtPos(col + i, row, position.getField());
                 spriteFile = i == power ? "resources/explosion_right_end.png" : "resources/explosion_right_middle.png";
+
                 if (!CollisionDetector.checkCollision(col + i, row, position.getField()) || obj instanceof Explosion) {
                     explosionList.add(ObjectFactory.createExplosion(col + i, row, position.getField(), spriteFile));
                     continue;
@@ -91,10 +92,13 @@ public class Bomb extends GameObject implements Destroyable {
             }
             break;
         }
+
         for (int i = 1; i <= power; i++) {
+
             if (col - i >= Field.getMinCol()) {
                 GameObject obj = Game.objectAtPos(col - i, row, position.getField());
                 spriteFile = i == power ? "resources/explosion_left_end.png" : "resources/explosion_left_middle.png";
+
                 if (!CollisionDetector.checkCollision(col - i, row, position.getField()) || obj instanceof Explosion) {
                     explosionList.add(ObjectFactory.createExplosion(col - i, row, position.getField(), spriteFile));
                     continue;
@@ -106,10 +110,13 @@ public class Bomb extends GameObject implements Destroyable {
             }
             break;
         }
+
         for (int i = 1; i <= power; i++) {
+
             if (row + i <= Field.getMaxRow()) {
                 GameObject obj = Game.objectAtPos(col, row + i, position.getField());
                 spriteFile = i == power ? "resources/explosion_down_end.png" : "resources/explosion_down_middle.png";
+
                 if (!CollisionDetector.checkCollision(col, row + i, position.getField()) || obj instanceof Explosion) {
                     explosionList.add(ObjectFactory.createExplosion(col, row + i, position.getField(), spriteFile));
                     continue;
@@ -121,10 +128,13 @@ public class Bomb extends GameObject implements Destroyable {
             }
             break;
         }
+
         for (int i = 1; i <= power; i++) {
+
             if (row - i >= Field.getMinRow()) {
                 GameObject obj = Game.objectAtPos(col, row - i, position.getField());
                 spriteFile = i == power ? "resources/explosion_up_end.png" : "resources/explosion_up_middle.png";
+
                 if (!CollisionDetector.checkCollision(col, row - i, position.getField()) || obj instanceof Explosion) {
                     explosionList.add(ObjectFactory.createExplosion(col, row - i, position.getField(), spriteFile));
                     continue;
@@ -138,6 +148,7 @@ public class Bomb extends GameObject implements Destroyable {
         }
 
         for (Explosion explosion : explosionList) {
+
             GameObject obj = CollisionDetector.checkCollision(explosion);
             if (CollisionDetector.checkCollision(explosion) instanceof Destroyable) {
                 ((Destroyable) obj).destroy();
@@ -154,7 +165,7 @@ public class Bomb extends GameObject implements Destroyable {
         try {
             Thread.sleep(DELETE_EXPLOSION_TIMER);
         } catch (InterruptedException ex) {
-
+            ex.printStackTrace();
         }
 
         for (Explosion ex : explosionList) {

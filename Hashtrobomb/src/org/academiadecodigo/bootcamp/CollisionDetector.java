@@ -15,12 +15,10 @@ public class CollisionDetector {
         Position position = new Position(col, row, field);
 
         for(GameObject gameObject : Game.gameObjects){
-
             if(position.equals(gameObject.getPosition())){
                 return true;
             }
         }
-
         return false;
     }
 
@@ -28,7 +26,6 @@ public class CollisionDetector {
     public static boolean checkCollision(Position position){
 
         for (GameObject gameObject : Game.gameObjects){
-
             if (position.equals((gameObject.getPosition()))){
                 return true;
             }

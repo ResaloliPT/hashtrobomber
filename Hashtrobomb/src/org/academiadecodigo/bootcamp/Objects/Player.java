@@ -14,21 +14,19 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Player extends GameObject implements Destroyable {
 
     private String[] resource = {"resources/player1_down.png", "resources/player2_down.png"};
-    private int maxBombs = 2;
-    private int bombPower = 3;
+    private int maxBombs = 1;
+    private int bombPower = 1;
     private int activeBombs = 0;
     private Picture character;
     private String name;
 
 
     public Player(String name, int col, int row, Field field, int type) {
-
         super(col, row, field);
         this.name = name;
         character = new Picture(position.getX(), position.getY(), resource[type]);
         character.draw();
-        character.grow(2,2);
-
+        character.grow(2, 2);
     }
 
     public void decreaseActiveBombs() {
@@ -81,7 +79,7 @@ public class Player extends GameObject implements Destroyable {
         return false;
     }
 
-    public void increaseBombs(){
+    public void increaseBombs() {
         maxBombs++;
     }
 
@@ -94,18 +92,18 @@ public class Player extends GameObject implements Destroyable {
         GameObject obj = null;
 
         for (GameObject gameObject : Game.gameObjects) {
-
             if (targetPosition.equals(gameObject.getPosition())) {
                 obj = gameObject;
                 break;
             }
         }
+
         if (obj == null) {
             return true;
         }
 
-        if(obj instanceof PowerUp){
-            switch (((PowerUp) obj).getType()){
+        if (obj instanceof PowerUp) {
+            switch (((PowerUp) obj).getType()) {
                 case POWER:
                     this.increasePower();
                     ((PowerUp) obj).destroy();
@@ -120,20 +118,15 @@ public class Player extends GameObject implements Destroyable {
         return !(obj instanceof Block ||
                 obj instanceof Wall ||
                 obj instanceof Bomb);
-
     }
 
 
-    public void setCharacter(String source){
+    public void setCharacter(String source) {
         character.load(source);
     }
 
-    public int getBombPower(){
+    public int getBombPower() {
         return bombPower;
-    }
-
-    public int getMaxBombs() {
-        return maxBombs;
     }
 
     public String getName() {

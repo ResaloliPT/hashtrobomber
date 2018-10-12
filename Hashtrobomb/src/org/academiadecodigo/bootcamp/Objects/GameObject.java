@@ -4,6 +4,7 @@ import org.academiadecodigo.bootcamp.Field;
 import org.academiadecodigo.bootcamp.Position.Position;
 
 public abstract class GameObject {
+
     protected Position position;
     protected boolean destroyed;
 
@@ -11,14 +12,7 @@ public abstract class GameObject {
         this.position = new Position(col, row, field);
     }
 
-    public boolean checkCollision(GameObject gameObject){
-
-        return this.position.equals(gameObject.position);
-    }
-
     public Position getPosition(){
         return position;
     }
-
-    //public abstract void delete();
 }

@@ -28,23 +28,25 @@ public class Game implements KeyboardHandler {
 
         field = new Field();
         level = new Level(field);
+
         gameObjects = level.level2();
         players[0] = ObjectFactory.createPlayer("player1", 0, 0, field, 0);
         players[1] = ObjectFactory.createPlayer("player2", 14, 14, field, 1);
         keyBinding();
     }
 
-    public void start() throws InterruptedException{
+    public void start() throws InterruptedException {
 
         init();
 
         while (!players[0].isDestroyed() && !players[1].isDestroyed()) {
             Thread.sleep(1);
         }
+        Player winner = players[0].isDestroyed() ? players[1] : players[0];
 
         end();
 
-        new EndingMenu();
+        new EndingMenu(winner);
 
     }
 
@@ -56,7 +58,6 @@ public class Game implements KeyboardHandler {
             int currentRow_p1 = players[0].getPosition().getRow();
             int currentCol_p2 = players[1].getPosition().getCol();
             int currentRow_p2 = players[1].getPosition().getRow();
-
 
             switch (e.getKey()) {
                 case KeyboardEvent.KEY_W:
@@ -132,7 +133,6 @@ public class Game implements KeyboardHandler {
 
             }
         }
-
     }
 
     @Override
