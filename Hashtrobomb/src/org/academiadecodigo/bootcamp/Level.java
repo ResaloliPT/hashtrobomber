@@ -18,7 +18,7 @@ public class Level {
 
     public Level(Field field) {
         this.field = field;
-        background = new Picture(0, 0, "resources/level1_bg.jpg");
+        background = new Picture(10, 10, "resources/level1_bg.jpg");
         background.draw();
     }
 

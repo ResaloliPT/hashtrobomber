@@ -4,7 +4,7 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Field {
-    private static final int PADDING = 50;
+    private static final int PADDING = 60;
     private static final int MIN_COL = 0;
     private static final int MIN_ROW = 0;
     private static final int MAX_COL = 14;
