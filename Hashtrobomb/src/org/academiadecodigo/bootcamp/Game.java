@@ -113,6 +113,7 @@ public class Game implements KeyboardHandler {
             case KeyboardEvent.KEY_6:
                 players[1].destroy();
 
+
                 break;
 
             case KeyboardEvent.KEY_7:
