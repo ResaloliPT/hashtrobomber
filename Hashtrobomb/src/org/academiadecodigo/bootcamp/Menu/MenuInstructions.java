@@ -1,6 +1,6 @@
 package org.academiadecodigo.bootcamp.Menu;
 
-import org.academiadecodigo.bootcamp.Music.Music;
+import org.academiadecodigo.bootcamp.Music.InGameMusic;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -19,7 +19,7 @@ public class MenuInstructions implements KeyboardHandler {
     private Picture two;
     private Picture one;
 
-    Music music = new Music();
+    InGameMusic inGameMusic = new InGameMusic();
 
     public MenuInstructions() {
         inst = new Picture(PADDING, PADDING, resource[0]);
@@ -39,14 +39,14 @@ public class MenuInstructions implements KeyboardHandler {
 
         inst.draw();
         while (!exitInst) {
-            inst.grow(0, 0);
+            Thread.sleep(50);
         }
 
         while (exitInst) {
 
             inst.delete();
 
-            music.startMusic();
+            inGameMusic.startMusic();
 
             three.draw();
             Thread.sleep(600);

@@ -3,6 +3,9 @@ package org.academiadecodigo.bootcamp.Menu;
 import org.academiadecodigo.bootcamp.Main;
 
 import javax.sound.sampled.*;
+import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -31,7 +34,7 @@ public class BombMusic {
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
-            //clip.loop(clip.LOOP_CONTINUOUSLY);
+
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         } catch (IOException e) {

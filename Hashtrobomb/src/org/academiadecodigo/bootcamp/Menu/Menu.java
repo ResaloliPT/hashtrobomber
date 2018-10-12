@@ -20,7 +20,6 @@ public class Menu implements KeyboardHandler {
         bg = new Picture(PADDING, PADDING, resource[0]);
         play = new Picture(140, 300, resource[1]);
 
-
         KeyboardEvent g = new KeyboardEvent();
         g.setKey(KeyboardEvent.KEY_SPACE);
         g.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -35,11 +34,12 @@ public class Menu implements KeyboardHandler {
         while (!startGame) {
             play.grow(10, 10);
             Thread.sleep(300);
-            play.grow(-10,-10);
+            play.grow(-10, -10);
             Thread.sleep(300);
         }
         play.delete();
         bg.delete();
+
     }
 
     @Override

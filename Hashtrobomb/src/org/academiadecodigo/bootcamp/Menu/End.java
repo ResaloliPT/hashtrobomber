@@ -1,6 +1,5 @@
 package org.academiadecodigo.bootcamp.Menu;
 
-import org.academiadecodigo.bootcamp.Objects.Player;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
@@ -16,10 +15,4 @@ public class End {
         end.draw();
 
     }
-
-
-    public void end() {
-        end.draw();
-    }
-
 }
