@@ -37,10 +37,7 @@ public class Game implements KeyboardHandler {
     public void start() throws InterruptedException{
 
         init();
-        int P1Bombs = players[0].getMaxBombs();
-        int P2Bombs = players[1].getMaxBombs();
-        int P1Power = players[0].getBombPower();
-        int P2Power = players[1].getBombPower();
+
         while (!players[0].isDestroyed() && !players[1].isDestroyed()) {
             Thread.sleep(1);
         }

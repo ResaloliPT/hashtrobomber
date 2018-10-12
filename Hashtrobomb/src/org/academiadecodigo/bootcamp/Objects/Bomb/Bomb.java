@@ -23,7 +23,7 @@ public class Bomb extends GameObject implements Destroyable {
     private final int DELETE_EXPLOSION_TIMER = 500;
     private int power;
     private final int EXPLOSION_TIMER = 2300;
-    private final int SOUND_TIMER = 2000;
+    private final int SOUND_TIMER = 1500;
     private Player player;
     private Picture bomb;
     private List<Explosion> explosionList = new LinkedList<>();
@@ -42,17 +42,6 @@ public class Bomb extends GameObject implements Destroyable {
         timerTask();
     }
 
-    public void bombAnimation() {
-
-        for (int i = 0; i < 4; i++) {
-            bomb.grow(i, i);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public void bombMusicTimer() {
         TimerTask explode = new TimerTask() {
@@ -60,7 +49,6 @@ public class Bomb extends GameObject implements Destroyable {
                 bombMusic.startMusic();
             }
         };
-       // Timer trigger = new Timer();
         trigger.schedule(explode, SOUND_TIMER);
     }
 
@@ -75,13 +63,12 @@ public class Bomb extends GameObject implements Destroyable {
                 explode();
             }
         };
-        //Timer trigger = new Timer();
         trigger.schedule(explode, EXPLOSION_TIMER);
     }
 
     public void explode() {
 
-//        bombAnimation();
+
         int col = position.getCol();
         int row = position.getRow();
         String spriteFile;
@@ -121,7 +108,7 @@ public class Bomb extends GameObject implements Destroyable {
         }
         for (int i = 1; i <= power; i++) {
             if (row + i <= Field.getMaxRow()) {
-                GameObject obj = Game.objectAtPos(col , row + i, position.getField());
+                GameObject obj = Game.objectAtPos(col, row + i, position.getField());
                 spriteFile = i == power ? "resources/explosion_down_end.png" : "resources/explosion_down_middle.png";
                 if (!CollisionDetector.checkCollision(col, row + i, position.getField()) || obj instanceof Explosion) {
                     explosionList.add(ObjectFactory.createExplosion(col, row + i, position.getField(), spriteFile));
@@ -155,10 +142,10 @@ public class Bomb extends GameObject implements Destroyable {
             if (CollisionDetector.checkCollision(explosion) instanceof Destroyable) {
                 ((Destroyable) obj).destroy();
             }
-            if(explosion.getPosition().equals(Game.players[0].getPosition())){
+            if (explosion.getPosition().equals(Game.players[0].getPosition())) {
                 Game.players[0].destroy();
             }
-            if(explosion.getPosition().equals(Game.players[1].getPosition())){
+            if (explosion.getPosition().equals(Game.players[1].getPosition())) {
                 Game.players[1].destroy();
             }
         }
