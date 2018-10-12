@@ -17,6 +17,7 @@ public class PowerUp extends GameObject implements Destroyable {
         type = PowerUpTypes.values()[(int)(Math.random() * PowerUpTypes.values().length)];
         pwrUpSprite = new Picture(position.getX(), position.getY(), "resources/fireball.png");
         pwrUpSprite.draw();
+        Game.gameObjects.add(this);
     }
 
     public void initPowerUp(){
@@ -30,6 +31,10 @@ public class PowerUp extends GameObject implements Destroyable {
         }
 
 
+    }
+
+    public PowerUpTypes getType() {
+        return type;
     }
 
     @Override

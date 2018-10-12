@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp.Objects;
 
 import org.academiadecodigo.bootcamp.Game;
 import org.academiadecodigo.bootcamp.Objects.Bomb.Bomb;
+import org.academiadecodigo.bootcamp.Objects.Bomb.PowerUp;
 import org.academiadecodigo.bootcamp.Objects.walls.Block;
 import org.academiadecodigo.bootcamp.Objects.walls.Wall;
 import org.academiadecodigo.bootcamp.Position.Directions;
@@ -96,10 +97,24 @@ public class Player extends GameObject implements Destroyable {
 
             if (targetPosition.equals(gameObject.getPosition())) {
                 obj = gameObject;
+                break;
             }
         }
         if (obj == null) {
             return true;
+        }
+
+        if(obj instanceof PowerUp){
+            switch (((PowerUp) obj).getType()){
+                case POWER:
+                    this.increasePower();
+                    ((PowerUp) obj).destroy();
+                    break;
+                case BOMB:
+                    this.increaseBombs();
+                    ((PowerUp) obj).destroy();
+                    break;
+            }
         }
 
         return !(obj instanceof Block ||
@@ -123,6 +138,7 @@ public class Player extends GameObject implements Destroyable {
     @Override
     public void destroy() {
         destroyed = true;
+        this.character.delete();
     }
 
     @Override

@@ -1,12 +1,14 @@
 package org.academiadecodigo.bootcamp;
 
+import org.academiadecodigo.bootcamp.Objects.Bomb.Explosion;
+import org.academiadecodigo.bootcamp.Objects.Bomb.PowerUp;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
+import org.academiadecodigo.bootcamp.Objects.Player;
 import org.academiadecodigo.bootcamp.Position.Position;
 
 import java.util.List;
 
 public class CollisionDetector {
-
 
     public static boolean checkCollision(int col, int row, Field field){
 

@@ -17,7 +17,7 @@ import java.util.List;
 public class Game implements KeyboardHandler {
     private Field field;
     private Level level;
-    private Player[] players = new Player[2];
+    public static Player[] players = new Player[2];
     private Keyboard keyboard = new Keyboard(this);
     public static List<GameObject> gameObjects = new LinkedList<>();
 
@@ -36,6 +36,10 @@ public class Game implements KeyboardHandler {
     }
 
     public void start() {
+
+        while (!(players[0].isDestroyed() || players[1].isDestroyed())){
+            System.out.println("piças");
+        }
 
     }
 
