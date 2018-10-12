@@ -14,7 +14,7 @@ public class Main {
 
             menu.start();
         } catch (InterruptedException e) {
-
+            e.printStackTrace();
         }
 
         MenuInstructions inst = new MenuInstructions();
@@ -23,9 +23,15 @@ public class Main {
             inst.start();
 
         } catch (InterruptedException i) {
-
+            i.printStackTrace();
         }
         Game game = new Game();
-        game.start();
+
+        try {
+
+            game.start();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 }

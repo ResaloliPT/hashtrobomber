@@ -1,6 +1,6 @@
 package org.academiadecodigo.bootcamp;
 
-import org.academiadecodigo.bootcamp.Objects.Bomb.PowerUp;
+import org.academiadecodigo.bootcamp.Menu.EndingMenu;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
 import org.academiadecodigo.bootcamp.Objects.Player;
@@ -17,12 +17,11 @@ import java.util.List;
 public class Game implements KeyboardHandler {
     private Field field;
     private Level level;
-    private Player[] players = new Player[2];
+    public static Player[] players = new Player[2];
     private Keyboard keyboard = new Keyboard(this);
     public static List<GameObject> gameObjects = new LinkedList<>();
 
     public Game() {
-        init();
     }
 
     public void init() {
@@ -35,92 +34,106 @@ public class Game implements KeyboardHandler {
         keyBinding();
     }
 
-    public void start() {
+    public void start() throws InterruptedException{
+
+        init();
+        int P1Bombs = players[0].getMaxBombs();
+        int P2Bombs = players[1].getMaxBombs();
+        int P1Power = players[0].getBombPower();
+        int P2Power = players[1].getBombPower();
+        while (!players[0].isDestroyed() && !players[1].isDestroyed()) {
+            Thread.sleep(1);
+        }
+
+        end();
+
+        new EndingMenu();
 
     }
 
     @Override
     public void keyPressed(KeyboardEvent e) {
 
-        int currentCol_p1 = players[0].getPosition().getCol();
-        int currentRow_p1 = players[0].getPosition().getRow();
-        int currentCol_p2 = players[1].getPosition().getCol();
-        int currentRow_p2 = players[1].getPosition().getRow();
+        if (players.length == 2) {
+            int currentCol_p1 = players[0].getPosition().getCol();
+            int currentRow_p1 = players[0].getPosition().getRow();
+            int currentCol_p2 = players[1].getPosition().getCol();
+            int currentRow_p2 = players[1].getPosition().getRow();
 
 
-        switch (e.getKey()) {
-            case KeyboardEvent.KEY_W:
-                players[0].setCharacter("resources/player1_up.png");
-                if (players[0].isMovementAvailable(new Position(currentCol_p1, currentRow_p1 - 1, field))) {
-                    players[0].move(Directions.UP);
-                }
-                break;
-            case KeyboardEvent.KEY_S:
-                players[0].setCharacter("resources/player1_down.png");
-                if (players[0].isMovementAvailable(new Position(currentCol_p1, currentRow_p1 + 1, field))) {
-                    players[0].move(Directions.DOWN);
-                }
-                break;
-            case KeyboardEvent.KEY_A:
-                players[0].setCharacter("resources/player1_left.png");
-                if (players[0].isMovementAvailable(new Position(currentCol_p1 - 1, currentRow_p1, field))) {
-                    players[0].move(Directions.LEFT);
-                }
-                break;
-            case KeyboardEvent.KEY_D:
-                players[0].setCharacter("resources/player1_right.png");
-                if (players[0].isMovementAvailable(new Position(currentCol_p1 + 1, currentRow_p1, field))) {
-                    players[0].move(Directions.RIGHT);
-                }
-                break;
-            case KeyboardEvent.KEY_SPACE:
-                if (!CollisionDetector.checkCollision(players[0].getPosition()) && players[0].dropBomb()) {
-                    gameObjects.add(ObjectFactory.createBomb(currentCol_p1, currentRow_p1, players[0], players[0].getBombPower(), field));
-                }
-                break;
+            switch (e.getKey()) {
+                case KeyboardEvent.KEY_W:
+                    players[0].setCharacter("resources/player1_up.png");
+                    if (players[0].isMovementAvailable(new Position(currentCol_p1, currentRow_p1 - 1, field))) {
+                        players[0].move(Directions.UP);
+                    }
+                    break;
+                case KeyboardEvent.KEY_S:
+                    players[0].setCharacter("resources/player1_down.png");
+                    if (players[0].isMovementAvailable(new Position(currentCol_p1, currentRow_p1 + 1, field))) {
+                        players[0].move(Directions.DOWN);
+                    }
+                    break;
+                case KeyboardEvent.KEY_A:
+                    players[0].setCharacter("resources/player1_left.png");
+                    if (players[0].isMovementAvailable(new Position(currentCol_p1 - 1, currentRow_p1, field))) {
+                        players[0].move(Directions.LEFT);
+                    }
+                    break;
+                case KeyboardEvent.KEY_D:
+                    players[0].setCharacter("resources/player1_right.png");
+                    if (players[0].isMovementAvailable(new Position(currentCol_p1 + 1, currentRow_p1, field))) {
+                        players[0].move(Directions.RIGHT);
+                    }
+                    break;
+                case KeyboardEvent.KEY_SPACE:
+                    if (!CollisionDetector.checkCollision(players[0].getPosition()) && players[0].dropBomb()) {
+                        gameObjects.add(ObjectFactory.createBomb(currentCol_p1, currentRow_p1, players[0], players[0].getBombPower(), field));
+                    }
+                    break;
 
-            case KeyboardEvent.KEY_UP:
-                players[1].setCharacter("resources/player2_up.png");
-                if (players[1].isMovementAvailable(new Position(currentCol_p2, currentRow_p2 - 1, field))) {
-                    players[1].move(Directions.UP);
-                }
-                break;
-            case KeyboardEvent.KEY_DOWN:
-                players[1].setCharacter("resources/player2_down.png");
-                if (players[1].isMovementAvailable(new Position(currentCol_p2, currentRow_p2 + 1, field))) {
-                    players[1].move(Directions.DOWN);
-                }
-                break;
-            case KeyboardEvent.KEY_LEFT:
-                players[1].setCharacter("resources/player2_left.png");
-                if (players[1].isMovementAvailable(new Position(currentCol_p2 - 1, currentRow_p2, field))) {
-                    players[1].move(Directions.LEFT);
-                }
-                break;
-            case KeyboardEvent.KEY_RIGHT:
-                players[1].setCharacter("resources/player2_right.png");
-                if (players[1].isMovementAvailable(new Position(currentCol_p2 + 1, currentRow_p2, field))) {
+                case KeyboardEvent.KEY_UP:
+                    players[1].setCharacter("resources/player2_up.png");
+                    if (players[1].isMovementAvailable(new Position(currentCol_p2, currentRow_p2 - 1, field))) {
+                        players[1].move(Directions.UP);
+                    }
+                    break;
+                case KeyboardEvent.KEY_DOWN:
+                    players[1].setCharacter("resources/player2_down.png");
+                    if (players[1].isMovementAvailable(new Position(currentCol_p2, currentRow_p2 + 1, field))) {
+                        players[1].move(Directions.DOWN);
+                    }
+                    break;
+                case KeyboardEvent.KEY_LEFT:
+                    players[1].setCharacter("resources/player2_left.png");
+                    if (players[1].isMovementAvailable(new Position(currentCol_p2 - 1, currentRow_p2, field))) {
+                        players[1].move(Directions.LEFT);
+                    }
+                    break;
+                case KeyboardEvent.KEY_RIGHT:
+                    players[1].setCharacter("resources/player2_right.png");
+                    if (players[1].isMovementAvailable(new Position(currentCol_p2 + 1, currentRow_p2, field))) {
 
-                    players[1].move(Directions.RIGHT);
-                }
-                break;
-            case KeyboardEvent.KEY_L:
-                if (!CollisionDetector.checkCollision(players[1].getPosition()) && players[1].dropBomb()) {
+                        players[1].move(Directions.RIGHT);
+                    }
+                    break;
+                case KeyboardEvent.KEY_L:
+                    if (!CollisionDetector.checkCollision(players[1].getPosition()) && players[1].dropBomb()) {
 
-                    gameObjects.add(ObjectFactory.createBomb(currentCol_p2, currentRow_p2, players[1], players[1].getBombPower(), field));
-                }
-                break;
-            case KeyboardEvent.KEY_6:
-                players[1].destroy();
+                        gameObjects.add(ObjectFactory.createBomb(currentCol_p2, currentRow_p2, players[1], players[1].getBombPower(), field));
+                    }
+                    break;
+                case KeyboardEvent.KEY_6:
+                    players[1].destroy();
 
+                    break;
 
-                break;
+                case KeyboardEvent.KEY_7:
+                    players[0].destroy();
 
-            case KeyboardEvent.KEY_7:
-                players[0].destroy();
+                    break;
 
-                break;
-
+            }
         }
 
     }
@@ -192,12 +205,19 @@ public class Game implements KeyboardHandler {
         keyboard.addEventListener(l);
     }
 
-    public static GameObject objectAtPos(int col, int row, Field field){
+    public void end() {
+
+        players = new Player[0];
+        gameObjects.clear();
+        field = new Field();
+    }
+
+    public static GameObject objectAtPos(int col, int row, Field field) {
 
         Position position = new Position(col, row, field);
 
-        for(GameObject object : gameObjects){
-            if(position.equals(object.getPosition())){
+        for (GameObject object : gameObjects) {
+            if (position.equals(object.getPosition())) {
                 return object;
             }
         }

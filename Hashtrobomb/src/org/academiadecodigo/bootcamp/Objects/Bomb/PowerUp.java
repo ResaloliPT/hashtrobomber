@@ -9,27 +9,32 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class PowerUp extends GameObject implements Destroyable {
     private PowerUpTypes type;
     private Picture pwrUpSprite;
-    private String[] resource = {"resources/fireball.png"};
+    private String[] resource = {"resources/powerup_power.png", "resources/powerup_bomb.png"};
 
 
     public PowerUp(int col, int row, Field field){
         super(col, row, field);
         type = PowerUpTypes.values()[(int)(Math.random() * PowerUpTypes.values().length)];
-        pwrUpSprite = new Picture(position.getX(), position.getY(), "resources/fireball.png");
+        initPowerUp(type);
         pwrUpSprite.draw();
+        Game.gameObjects.add(this);
     }
 
-    public void initPowerUp(){
+    public void initPowerUp(PowerUpTypes type){
 
         if(type == PowerUpTypes.BOMB){
-            pwrUpSprite = new Picture(position.getCol(), position.getRow(), resource[1]);
+            pwrUpSprite = new Picture(position.getX(), position.getY(), resource[1]);
 
         } else {
-            pwrUpSprite = new Picture(position.getCol(), position.getRow(), resource[0]);
+            pwrUpSprite = new Picture(position.getX(), position.getY(), resource[0]);
 
         }
 
 
+    }
+
+    public PowerUpTypes getType() {
+        return type;
     }
 
     @Override
