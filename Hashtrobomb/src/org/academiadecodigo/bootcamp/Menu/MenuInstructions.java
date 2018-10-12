@@ -11,7 +11,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class MenuInstructions implements KeyboardHandler {
 
     private boolean exitInst;
-    private String[] resource = {"resources/inst.png", "resources/1.png", "resources/2.png", "resources/3.png",};
+    private String[] resource = {"resources/menuinstructions.jpg", "resources/1.jpg", "resources/2.jpg", "resources/3.jpg"};
     private static final int PADDING = 10;
     private Picture inst;
     private Keyboard keyboard = new Keyboard(this);
