@@ -82,6 +82,7 @@ public class Bomb extends GameObject implements Destroyable {
     public void explode() {
 
 //        bombAnimation();
+        bombMusic.startMusic();
         int col = position.getCol();
         int row = position.getRow();
         String spriteFile;
