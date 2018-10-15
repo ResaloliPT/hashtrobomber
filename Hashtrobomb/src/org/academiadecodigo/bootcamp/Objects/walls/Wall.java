@@ -8,9 +8,9 @@ public class Wall extends GameObject {
 
     private Picture wallSprite;
 
-    public Wall (int col, int row, Field field){
+    public Wall (int col, int row){
 
-        super(col, row, field);
+        super(col, row);
         wallSprite = new Picture(position.getX(), position.getY(), "resources/wall.png");
         wallSprite.draw();
 

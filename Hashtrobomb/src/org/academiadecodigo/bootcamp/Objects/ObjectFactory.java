@@ -9,30 +9,30 @@ import org.academiadecodigo.bootcamp.Objects.walls.Wall;
 
 public class ObjectFactory {
 
-    public static Player createPlayer(String name, int col, int row, Field field, int type) {
-        return new Player(name, col, row, field, type);
+    public static Player createPlayer(String name, int col, int row, int type) {
+        return new Player(name, col, row, type);
     }
 
-    public static Wall createWall(int col, int row, Field field) {
-        return new Wall(col, row, field);
+    public static Wall createWall(int col, int row) {
+        return new Wall(col, row);
     }
 
-    public static Block createBlock(int col, int row, Field field) {
+    public static Block createBlock(int col, int row) {
         int powerUpProbability = (int) (Math.random() * 100);
         boolean powerUp = (powerUpProbability <= 15) ? true : false;
 
-        return new Block(col, row, field, powerUp);
+        return new Block(col, row, powerUp);
     }
 
-    public static PowerUp createPowerUp(int col, int row, Field field) {
-        return new PowerUp(col, row, field);
+    public static PowerUp createPowerUp(int col, int row) {
+        return new PowerUp(col, row);
     }
 
-    public static Bomb createBomb(int col, int row, Player player, int power, Field field) {
-        return new Bomb(col, row, player, power, field);
+    public static Bomb createBomb(int col, int row, Player player, int power) {
+        return new Bomb(col, row, player, power);
     }
 
-    public static Explosion createExplosion(int col, int row, Field field, String sprite) {
-        return new Explosion(col, row, field, sprite);
+    public static Explosion createExplosion(int col, int row, String sprite) {
+        return new Explosion(col, row, sprite);
     }
 }

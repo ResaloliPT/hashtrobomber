@@ -30,8 +30,8 @@ public class Bomb extends GameObject implements Destroyable {
 
     BombMusic bombMusic = new BombMusic();
 
-    public Bomb(int col, int row, Player player, int power, Field field) {
-        super(col, row, field);
+    public Bomb(int col, int row, Player player, int power) {
+        super(col, row);
         this.power = power;
         this.player = player;
 
@@ -73,20 +73,20 @@ public class Bomb extends GameObject implements Destroyable {
         String spriteFile;
         this.delete();
 
-        explosionList.add(ObjectFactory.createExplosion(col, row, position.getField(), "resources/explosion_center.png"));
+        explosionList.add(ObjectFactory.createExplosion(col, row, "resources/explosion_center.png"));
 
         for (int i = 1; i <= power; i++) {
 
-            if (col + i <= Field.getMaxCol()) {
-                GameObject obj = Game.objectAtPos(col + i, row, position.getField());
+            if (col + i <= Field.MAX_COL) {
+                GameObject obj = Game.objectAtPos(col + i, row);
                 spriteFile = i == power ? "resources/explosion_right_end.png" : "resources/explosion_right_middle.png";
 
-                if (!CollisionDetector.checkCollision(col + i, row, position.getField()) || obj instanceof Explosion) {
-                    explosionList.add(ObjectFactory.createExplosion(col + i, row, position.getField(), spriteFile));
+                if (!CollisionDetector.checkCollision(col + i, row) || obj instanceof Explosion) {
+                    explosionList.add(ObjectFactory.createExplosion(col + i, row, spriteFile));
                     continue;
                 }
                 if (!(obj instanceof Wall)) {
-                    explosionList.add(ObjectFactory.createExplosion(col + i, row, position.getField(), "resources/explosion_right_end.png"));
+                    explosionList.add(ObjectFactory.createExplosion(col + i, row, "resources/explosion_right_end.png"));
                     break;
                 }
             }
@@ -95,16 +95,16 @@ public class Bomb extends GameObject implements Destroyable {
 
         for (int i = 1; i <= power; i++) {
 
-            if (col - i >= Field.getMinCol()) {
-                GameObject obj = Game.objectAtPos(col - i, row, position.getField());
+            if (col - i >= Field.MIN_COL) {
+                GameObject obj = Game.objectAtPos(col - i, row);
                 spriteFile = i == power ? "resources/explosion_left_end.png" : "resources/explosion_left_middle.png";
 
-                if (!CollisionDetector.checkCollision(col - i, row, position.getField()) || obj instanceof Explosion) {
-                    explosionList.add(ObjectFactory.createExplosion(col - i, row, position.getField(), spriteFile));
+                if (!CollisionDetector.checkCollision(col - i, row) || obj instanceof Explosion) {
+                    explosionList.add(ObjectFactory.createExplosion(col - i, row, spriteFile));
                     continue;
                 }
-                if (!(Game.objectAtPos(col - i, row, position.getField()) instanceof Wall)) {
-                    explosionList.add(ObjectFactory.createExplosion(col - i, row, position.getField(), "resources/explosion_left_end.png"));
+                if (!(Game.objectAtPos(col - i, row) instanceof Wall)) {
+                    explosionList.add(ObjectFactory.createExplosion(col - i, row, "resources/explosion_left_end.png"));
                     break;
                 }
             }
@@ -113,16 +113,16 @@ public class Bomb extends GameObject implements Destroyable {
 
         for (int i = 1; i <= power; i++) {
 
-            if (row + i <= Field.getMaxRow()) {
-                GameObject obj = Game.objectAtPos(col, row + i, position.getField());
+            if (row + i <= Field.MAX_ROW) {
+                GameObject obj = Game.objectAtPos(col, row + i);
                 spriteFile = i == power ? "resources/explosion_down_end.png" : "resources/explosion_down_middle.png";
 
-                if (!CollisionDetector.checkCollision(col, row + i, position.getField()) || obj instanceof Explosion) {
-                    explosionList.add(ObjectFactory.createExplosion(col, row + i, position.getField(), spriteFile));
+                if (!CollisionDetector.checkCollision(col, row + i) || obj instanceof Explosion) {
+                    explosionList.add(ObjectFactory.createExplosion(col, row + i, spriteFile));
                     continue;
                 }
-                if (!(Game.objectAtPos(col, row + i, position.getField()) instanceof Wall)) {
-                    explosionList.add(ObjectFactory.createExplosion(col, row + i, position.getField(), "resources/explosion_down_end.png"));
+                if (!(Game.objectAtPos(col, row + i) instanceof Wall)) {
+                    explosionList.add(ObjectFactory.createExplosion(col, row + i, "resources/explosion_down_end.png"));
                     break;
                 }
             }
@@ -131,16 +131,16 @@ public class Bomb extends GameObject implements Destroyable {
 
         for (int i = 1; i <= power; i++) {
 
-            if (row - i >= Field.getMinRow()) {
-                GameObject obj = Game.objectAtPos(col, row - i, position.getField());
+            if (row - i >= Field.MIN_ROW) {
+                GameObject obj = Game.objectAtPos(col, row - i);
                 spriteFile = i == power ? "resources/explosion_up_end.png" : "resources/explosion_up_middle.png";
 
-                if (!CollisionDetector.checkCollision(col, row - i, position.getField()) || obj instanceof Explosion) {
-                    explosionList.add(ObjectFactory.createExplosion(col, row - i, position.getField(), spriteFile));
+                if (!CollisionDetector.checkCollision(col, row - i) || obj instanceof Explosion) {
+                    explosionList.add(ObjectFactory.createExplosion(col, row - i, spriteFile));
                     continue;
                 }
-                if (!(Game.objectAtPos(col, row - i, position.getField()) instanceof Wall)) {
-                    explosionList.add(ObjectFactory.createExplosion(col, row - i, position.getField(), "resources/explosion_up_end.png"));
+                if (!(Game.objectAtPos(col, row - i) instanceof Wall)) {
+                    explosionList.add(ObjectFactory.createExplosion(col, row - i, "resources/explosion_up_end.png"));
                     break;
                 }
             }

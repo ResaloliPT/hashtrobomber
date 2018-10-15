@@ -142,14 +142,14 @@ public class Level {
     }
 
     public void generateBlocks() {
-        for (int col = field.getMinCol(); col <= field.getMaxCol(); col++) {
-            for (int row = field.getMinRow(); row <= field.getMaxRow(); row++) {
-                if (!((col == field.getMinCol() && row == field.getMinRow()) ||
-                        (col == field.getMinCol() && row == field.getMinRow() + 1) ||
-                        (col == field.getMinCol() + 1 && row == field.getMinRow()) ||
-                        (col == field.getMaxCol() && row == field.getMaxRow()) ||
-                        (col == field.getMaxCol() && row == field.getMaxRow() - 1) ||
-                        (col == field.getMaxCol() - 1 && row == field.getMaxRow()))) {
+        for (int col = Field.MIN_COL; col <= Field.MAX_COL; col++) {
+            for (int row = Field.MIN_ROW; row <= Field.MAX_ROW; row++) {
+                if (!((col == Field.MIN_COL && row == Field.MIN_ROW) ||
+                        (col == Field.MIN_COL && row == Field.MIN_ROW + 1) ||
+                        (col == Field.MIN_COL + 1 && row == Field.MIN_ROW) ||
+                        (col == Field.MAX_COL && row == Field.MAX_ROW) ||
+                        (col == Field.MAX_COL && row == Field.MAX_ROW - 1) ||
+                        (col == Field.MAX_COL - 1 && row == Field.MAX_ROW))) {
 
                     int blockProbability = (int) (Math.random() * 100);
 
@@ -162,7 +162,7 @@ public class Level {
     }
 
     public void addWall(int col, int row) {
-        elements.add(ObjectFactory.createWall(col, row, field));
+        elements.add(ObjectFactory.createWall(col, row));
     }
 
     public void addBlock(int col, int row) {
@@ -171,6 +171,6 @@ public class Level {
                 return;
             }
         }
-        elements.add(ObjectFactory.createBlock(col, row, field));
+        elements.add(ObjectFactory.createBlock(col, row));
     }
 }

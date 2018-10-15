@@ -1,21 +1,14 @@
 package org.academiadecodigo.bootcamp.Position;
 
-import javafx.geometry.Pos;
 import org.academiadecodigo.bootcamp.Field;
 
 public class Position {
     private int col;
     private int row;
-    private int x;
-    private int y;
-    private Field field;
 
-    public Position(int col, int row,Field field) {
+    public Position(int col, int row) {
         this.col = col;
         this.row = row;
-        this.x = (col * field.getCellSize()) + field.getPadding();
-        this.y = (row * field.getCellSize()) + field.getPadding();
-        this.field = field;
     }
 
     public int getCol() {
@@ -35,23 +28,11 @@ public class Position {
     }
 
     public int getX() {
-        return x;
+        return (col * Field.CELL_SIZE) + Field.PADDING;
     }
 
     public int getY() {
-        return y;
-    }
-
-    public Field getField() {
-        return field;
-    }
-
-    public void setX(int x){
-        this.x = x;
-    }
-
-    public void setY(int y){
-        this.y = y;
+        return (row * Field.CELL_SIZE) + Field.PADDING;
     }
 
     @Override

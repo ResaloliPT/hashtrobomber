@@ -1,6 +1,5 @@
 package org.academiadecodigo.bootcamp.Objects.Bomb;
 
-import org.academiadecodigo.bootcamp.Field;
 import org.academiadecodigo.bootcamp.Game;
 import org.academiadecodigo.bootcamp.Objects.Destroyable;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
@@ -12,8 +11,8 @@ public class PowerUp extends GameObject implements Destroyable {
     private Picture pwrUpSprite;
     private String[] resource = {"resources/powerup_power.png", "resources/powerup_bomb.png"};
 
-    public PowerUp(int col, int row, Field field){
-        super(col, row, field);
+    public PowerUp(int col, int row){
+        super(col, row);
         type = PowerUpTypes.values()[(int)(Math.random() * PowerUpTypes.values().length)];
         initPowerUp(type);
         pwrUpSprite.draw();

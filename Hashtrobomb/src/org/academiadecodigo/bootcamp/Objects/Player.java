@@ -21,8 +21,8 @@ public class Player extends GameObject implements Destroyable {
     private String name;
 
 
-    public Player(String name, int col, int row, Field field, int type) {
-        super(col, row, field);
+    public Player(String name, int col, int row, int type) {
+        super(col, row);
         this.name = name;
         character = new Picture(position.getX(), position.getY(), resource[type]);
         character.draw();
@@ -37,35 +37,27 @@ public class Player extends GameObject implements Destroyable {
 
         switch (direction) {
             case UP:
-                if (position.getRow() != position.getField().getMinRow()) {
-                    character.delete();
+                if (position.getRow() != Field.MIN_ROW) {
                     position.setRow(position.getRow() - 1);
-                    character.translate(0, -position.getField().getCellSize());
-                    character.draw();
+                    character.translate(0, -Field.CELL_SIZE);
                 }
                 break;
             case DOWN:
-                if (position.getRow() != position.getField().getMaxRow()) {
-                    character.delete();
+                if (position.getRow() != Field.MAX_ROW) {
                     position.setRow(position.getRow() + 1);
-                    character.translate(0, position.getField().getCellSize());
-                    character.draw();
+                    character.translate(0, Field.CELL_SIZE);
                 }
                 break;
             case LEFT:
-                if (position.getCol() != position.getField().getMinCol()) {
-                    character.delete();
+                if (position.getCol() != Field.MIN_COL) {
                     position.setCol(position.getCol() - 1);
-                    character.translate(-position.getField().getCellSize(), 0);
-                    character.draw();
+                    character.translate(-Field.CELL_SIZE, 0);
                 }
                 break;
             case RIGHT:
-                if (position.getCol() != position.getField().getMaxCol()) {
-                    character.delete();
+                if (position.getCol() != Field.MAX_COL) {
                     position.setCol(position.getCol() + 1);
-                    character.translate(position.getField().getCellSize(), 0);
-                    character.draw();
+                    character.translate(Field.CELL_SIZE, 0);
                 }
                 break;
         }
@@ -131,6 +123,14 @@ public class Player extends GameObject implements Destroyable {
 
     public String getName() {
         return name;
+    }
+
+    public int getActiveBombs() {
+        return activeBombs;
+    }
+
+    public int getMaxBombs() {
+        return maxBombs;
     }
 
     @Override

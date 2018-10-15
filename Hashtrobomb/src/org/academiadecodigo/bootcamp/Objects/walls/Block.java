@@ -12,8 +12,8 @@ public class Block extends GameObject implements Destroyable {
     private Picture block;
     private Picture powerUpObj;
 
-    public Block(int col, int row, Field field, boolean powerUp){
-        super(col, row, field);
+    public Block(int col, int row, boolean powerUp){
+        super(col, row);
         this.powerUp = powerUp;
 
         block = new Picture(position.getX(), position.getY(), "resources/block.png");
@@ -25,7 +25,7 @@ public class Block extends GameObject implements Destroyable {
     @Override
     public void destroy(){
         if(powerUp){
-            ObjectFactory.createPowerUp(this.position.getCol(), this.position.getRow(), position.getField());
+            ObjectFactory.createPowerUp(this.position.getCol(), this.position.getRow());
         }
         block.delete();
         destroyed = true;

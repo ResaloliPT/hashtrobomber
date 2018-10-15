@@ -36,34 +36,45 @@ public class MenuInstructions implements KeyboardHandler {
     }
 
 
-    public void start() throws InterruptedException {
+    public void start() {
 
         inst.draw();
         while (!exitInst) {
-            Thread.sleep(50);
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+                System.out.println("Error on Instructions loop.");
+                ex.printStackTrace();
+            }
         }
 
         while (exitInst) {
 
-            inst.delete();
-            inGameMusic.startMusic();
+            try {
+                inst.delete();
+                inGameMusic.startMusic();
 
-            three.draw();
-            Thread.sleep(600);
-            three.delete();
+                three.draw();
+                Thread.sleep(600);
+                three.delete();
 
-            Thread.sleep(300);
+                Thread.sleep(300);
 
-            two.draw();
-            Thread.sleep(600);
-            two.delete();
+                two.draw();
+                Thread.sleep(600);
+                two.delete();
 
-            Thread.sleep(300);
+                Thread.sleep(300);
 
-            one.draw();
-            Thread.sleep(600);
-            one.delete();
-            break;
+                one.draw();
+                Thread.sleep(600);
+                one.delete();
+                break;
+            } catch (InterruptedException ex) {
+                System.out.println("Error on Instructions loop.");
+                ex.printStackTrace();
+            }
+
         }
 
 

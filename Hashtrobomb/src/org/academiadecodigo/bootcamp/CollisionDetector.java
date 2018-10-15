@@ -10,9 +10,9 @@ import java.util.List;
 
 public class CollisionDetector {
 
-    public static boolean checkCollision(int col, int row, Field field){
+    public static boolean checkCollision(int col, int row){
 
-        Position position = new Position(col, row, field);
+        Position position = new Position(col, row);
 
         for(GameObject gameObject : Game.gameObjects){
             if(position.equals(gameObject.getPosition())){
