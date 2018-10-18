@@ -15,17 +15,10 @@ public class MenuInstructions implements KeyboardHandler {
     private boolean exitInst;
     private Picture inst;
     private Keyboard keyboard = new Keyboard(this);
-    private Picture three;
-    private Picture two;
-    private Picture one;
 
     public MenuInstructions() {
         inst = new Picture(PADDING, PADDING, RenderConfigs.INSTRUCTIONS);
         inst.draw();
-
-        one = new Picture(PADDING, PADDING, RenderConfigs.COUNTDOWN_1);
-        two = new Picture(PADDING, PADDING, RenderConfigs.COUNTDOWN_2);
-        three = new Picture(PADDING, PADDING, RenderConfigs.COUNTDOWN_3);
 
         KeyboardEvent startGame = new KeyboardEvent();
         startGame.setKey(KeyboardEvent.KEY_SPACE);
@@ -45,37 +38,8 @@ public class MenuInstructions implements KeyboardHandler {
                 ex.printStackTrace();
             }
         }
-
-        while (exitInst) {
-
-            try {
-                inst.delete();
-                Music.startMusic(Music.MUSIC_BG, true);
-
-                three.draw();
-
-                Thread.sleep(900);
-
-                two.draw();
-                three.delete();
-
-                Thread.sleep(900);
-
-                one.draw();
-                two.delete();
-
-                Thread.sleep(900);
-
-                one.delete();
-                break;
-            } catch (InterruptedException ex) {
-                System.out.println("Error on Instructions loop.");
-                ex.printStackTrace();
-            }
-
-        }
-
-
+        inst.delete();
+        Music.startMusic(Music.MUSIC_BG, true);
     }
 
     @Override

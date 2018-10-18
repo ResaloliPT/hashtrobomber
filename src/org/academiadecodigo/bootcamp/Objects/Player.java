@@ -11,22 +11,18 @@ import org.academiadecodigo.bootcamp.Position.Position;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class Player extends GameObject implements Destroyable {
+public class Player extends DestoyableAbstract {
 
-    private String[] resource = {"resources/player1_down.png", "resources/player2_down.png"};
     private int maxBombs = 1;
     private int bombPower = 1;
     private int activeBombs = 0;
-    private Picture character;
     private String name;
 
 
     public Player(String name, int col, int row, String startIMG) {
-        super(col, row);
+        super(col, row, startIMG);
         this.name = name;
-        character = new Picture(position.getX(), position.getY(), startIMG);
-        character.draw();
-        character.grow(2, 2);
+        growImg(2, 2);
     }
 
     public void decreaseActiveBombs() {
@@ -37,27 +33,27 @@ public class Player extends GameObject implements Destroyable {
 
         switch (direction) {
             case UP:
-                if (position.getRow() != Field.MIN_ROW) {
-                    position.setRow(position.getRow() - 1);
-                    character.translate(0, -Field.CELL_SIZE);
+                if (getRow() != Field.MIN_ROW) {
+                    setRow(getRow() - 1);
+                    tanslateImg(0, -Field.CELL_SIZE);
                 }
                 break;
             case DOWN:
-                if (position.getRow() != Field.MAX_ROW) {
-                    position.setRow(position.getRow() + 1);
-                    character.translate(0, Field.CELL_SIZE);
+                if (getRow() != Field.MAX_ROW) {
+                    setRow(getRow() + 1);
+                    tanslateImg(0, Field.CELL_SIZE);
                 }
                 break;
             case LEFT:
-                if (position.getCol() != Field.MIN_COL) {
-                    position.setCol(position.getCol() - 1);
-                    character.translate(-Field.CELL_SIZE, 0);
+                if (getCol() != Field.MIN_COL) {
+                    setCol(getCol() - 1);
+                    tanslateImg(-Field.CELL_SIZE, 0);
                 }
                 break;
             case RIGHT:
-                if (position.getCol() != Field.MAX_COL) {
-                    position.setCol(position.getCol() + 1);
-                    character.translate(Field.CELL_SIZE, 0);
+                if (getCol() != Field.MAX_COL) {
+                    setCol(getCol() + 1);
+                    tanslateImg(Field.CELL_SIZE, 0);
                 }
                 break;
         }
@@ -84,7 +80,7 @@ public class Player extends GameObject implements Destroyable {
         GameObject obj = null;
 
         for (GameObject gameObject : Game.gameObjects) {
-            if (targetPosition.equals(gameObject.getPosition())) {
+            if (gameObject.getCol() == targetPosition.getCol() && gameObject.getRow() == targetPosition.getRow()) {
                 obj = gameObject;
                 break;
             }
@@ -114,7 +110,7 @@ public class Player extends GameObject implements Destroyable {
 
 
     public void setCharacter(String source) {
-        character.load(source);
+        changeImage(source);
     }
 
     public int getBombPower() {
@@ -132,16 +128,4 @@ public class Player extends GameObject implements Destroyable {
     public int getMaxBombs() {
         return maxBombs;
     }
-
-    @Override
-    public void destroy() {
-        destroyed = true;
-        this.character.delete();
-    }
-
-    @Override
-    public boolean isDestroyed() {
-        return destroyed;
-    }
-
 }

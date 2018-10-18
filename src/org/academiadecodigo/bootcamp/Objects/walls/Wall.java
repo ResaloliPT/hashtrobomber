@@ -6,11 +6,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Wall extends GameObject {
 
-    private Picture wallSprite;
-
     public Wall (int col, int row){
-        super(col, row);
-        wallSprite = new Picture(position.getX(), position.getY(), RenderConfigs.MAP_WALL);
-        wallSprite.draw();
+        super(col, row, RenderConfigs.MAP_WALL);
     }
 }
