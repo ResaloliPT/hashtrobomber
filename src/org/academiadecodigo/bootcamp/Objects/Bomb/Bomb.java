@@ -90,7 +90,7 @@ public class Bomb extends GameObject implements Destroyable {
             };
 
             if (col - i >= Field.MIN_COL && !leftStopped) {
-                if (i == power || objs[0] instanceof Destroyable) {
+                if (i == power || objs[0] instanceof Destroyable || (Game.objectAtPos(col - (i + 1), row) instanceof Wall || col - (i + 1) < Field.MIN_COL)) {
 
                     spriteFile = RenderConfigs.BOMB_LEFT_END;
                     leftStopped = true;
@@ -108,7 +108,7 @@ public class Bomb extends GameObject implements Destroyable {
             }
 
             if (col + i <= Field.MAX_COL && !rightStopped) {
-                if (i == power || objs[1] instanceof Destroyable) {
+                if (i == power || objs[1] instanceof Destroyable || (Game.objectAtPos(col + (i + 1), row) instanceof Wall || col + (i + 1) > Field.MAX_COL)) {
 
                     spriteFile = RenderConfigs.BOMB_RIGHT_END;
                     rightStopped = true;
@@ -126,7 +126,7 @@ public class Bomb extends GameObject implements Destroyable {
             }
 
             if (row - i >= Field.MIN_ROW && !upStopped) {
-                if (i == power || objs[2] instanceof Destroyable || (Game.objectAtPos(col, row - 2) instanceof Wall || row - i < Field.MIN_ROW)) {
+                if (i == power || objs[2] instanceof Destroyable || (Game.objectAtPos(col, row - (i + 1)) instanceof Wall || row - (i + 1) < Field.MIN_ROW)) {
 
                     spriteFile = RenderConfigs.BOMB_UP_END;
                     upStopped = true;
@@ -144,7 +144,7 @@ public class Bomb extends GameObject implements Destroyable {
             }
 
             if (row + i <= Field.MAX_ROW && !downStopped) {
-                if (i == power || objs[3] instanceof Destroyable) {
+                if (i == power || objs[3] instanceof Destroyable || (Game.objectAtPos(col, row + (i + 1)) instanceof Wall || row + (i + 1) > Field.MAX_ROW)) {
 
                     spriteFile = RenderConfigs.BOMB_DOWN_END;
                     downStopped = true;
@@ -194,6 +194,7 @@ public class Bomb extends GameObject implements Destroyable {
     @Override
     public void destroy() {
         destroyed = true;
+        trigger.cancel();
     }
 
     @Override
