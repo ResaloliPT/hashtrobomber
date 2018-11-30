@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp;
 
 import org.academiadecodigo.bootcamp.Menu.EndingMenu;
+import org.academiadecodigo.bootcamp.Menu.MenuCountdown;
 import org.academiadecodigo.bootcamp.Objects.GameObject;
 import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
 import org.academiadecodigo.bootcamp.Objects.Player;
@@ -19,26 +20,29 @@ public class Game implements KeyboardHandler {
     private Field field;
     private Level level;
     public static Player[] players = new Player[2];
+    private PlayerDetails[] pDetails = new PlayerDetails[2];
     private Keyboard keyboard = new Keyboard(this);
     public static List<GameObject> gameObjects = new LinkedList<>();
 
     public Game() {
-    }
-
-    public void init() {
-
         field = new Field();
         level = new Level(field);
 
-        gameObjects = level.level2();
+        gameObjects = level.level1();
+
         players[0] = ObjectFactory.createPlayer("player1", 0, 0, RenderConfigs.PLAYER1_DOWN);
         players[1] = ObjectFactory.createPlayer("player2", 14, 14, RenderConfigs.PLAYER2_DOWN);
+
+        //pDetails[0] = new PlayerDetails(players[0]);
+        //pDetails[1] = new PlayerDetails(players[1]);
+
         keyBinding();
     }
 
+
     public void start() {
 
-        init();
+        MenuCountdown.showCountdown();
 
         while (!players[0].isDestroyed() && !players[1].isDestroyed()) {
             try {
@@ -60,10 +64,10 @@ public class Game implements KeyboardHandler {
     public void keyPressed(KeyboardEvent e) {
 
         if (players.length == 2) {
-            int currentCol_p1 = players[0].getPosition().getCol();
-            int currentRow_p1 = players[0].getPosition().getRow();
-            int currentCol_p2 = players[1].getPosition().getCol();
-            int currentRow_p2 = players[1].getPosition().getRow();
+            int currentCol_p1 = players[0].getCol();
+            int currentRow_p1 = players[0].getRow();
+            int currentCol_p2 = players[1].getCol();
+            int currentRow_p2 = players[1].getRow();
 
             switch (e.getKey()) {
                 case KeyboardEvent.KEY_W:
@@ -91,9 +95,8 @@ public class Game implements KeyboardHandler {
                     }
                     break;
                 case KeyboardEvent.KEY_SPACE:
-                    if (!CollisionDetector.checkCollision(players[0].getPosition()) && players[0].dropBomb()) {
-                        gameObjects.add(ObjectFactory.createBomb(currentCol_p1, currentRow_p1, players[0], players[0].getBombPower()));
-                    }
+                    players[0].dropBomb();
+                    gameObjects.add(ObjectFactory.createBomb(currentCol_p1, currentRow_p1, players[0], players[0].getBombPower()));
                     break;
 
                 case KeyboardEvent.KEY_UP:
@@ -122,10 +125,8 @@ public class Game implements KeyboardHandler {
                     }
                     break;
                 case KeyboardEvent.KEY_L:
-                    if (!CollisionDetector.checkCollision(players[1].getPosition()) && players[1].dropBomb()) {
-
-                        gameObjects.add(ObjectFactory.createBomb(currentCol_p2, currentRow_p2, players[1], players[1].getBombPower()));
-                    }
+                    players[1].dropBomb();
+                    gameObjects.add(ObjectFactory.createBomb(currentCol_p2, currentRow_p2, players[1], players[1].getBombPower()));
                     break;
                 case KeyboardEvent.KEY_6:
                     players[1].destroy();
@@ -219,7 +220,7 @@ public class Game implements KeyboardHandler {
         Position position = new Position(col, row);
 
         for (GameObject object : gameObjects) {
-            if (position.equals(object.getPosition())) {
+            if (position.getCol() == object.getCol() && position.getRow() == object.getRow()) {
                 return object;
             }
         }

@@ -4,10 +4,7 @@ import org.academiadecodigo.bootcamp.CollisionDetector;
 import org.academiadecodigo.bootcamp.Field;
 import org.academiadecodigo.bootcamp.Game;
 import org.academiadecodigo.bootcamp.Music.Music;
-import org.academiadecodigo.bootcamp.Objects.Destroyable;
-import org.academiadecodigo.bootcamp.Objects.GameObject;
-import org.academiadecodigo.bootcamp.Objects.ObjectFactory;
-import org.academiadecodigo.bootcamp.Objects.Player;
+import org.academiadecodigo.bootcamp.Objects.*;
 import org.academiadecodigo.bootcamp.Objects.walls.Wall;
 import org.academiadecodigo.bootcamp.configs.RenderConfigs;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -18,24 +15,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class Bomb extends GameObject implements Destroyable {
+public class Bomb extends DestoyableAbstract {
+
     private final int DELETE_EXPLOSION_TIMER = 500;
     private final int EXPLOSION_TIMER = 2300;
     private final int SOUND_TIMER = 1500;
     private Timer trigger = new Timer();
     private int power;
     private Player player;
-    private Picture bomb;
     private List<Explosion> explosionList = new LinkedList<>();
 
 
     public Bomb(int col, int row, Player player, int power) {
-        super(col, row);
+        super(col, row, RenderConfigs.BOMB_ITEM);
         this.power = power;
         this.player = player;
 
-        bomb = new Picture(position.getX(), position.getY(), RenderConfigs.BOMB_ITEM);
-        bomb.draw();
         bombMusicTimer();
         timerTask();
     }
@@ -50,11 +45,6 @@ public class Bomb extends GameObject implements Destroyable {
         trigger.schedule(explode, SOUND_TIMER);
     }
 
-    public void delete() {
-        bomb.delete();
-        Game.gameObjects.remove(this);
-    }
-
     public void timerTask() {
         TimerTask explode = new TimerTask() {
             public void run() {
@@ -66,11 +56,11 @@ public class Bomb extends GameObject implements Destroyable {
 
     public void explode() {
 
-        int col = position.getCol();
-        int row = position.getRow();
+        int col = getCol();
+        int row = getRow();
 
         String spriteFile;
-        this.delete();
+        destroy();
 
         explosionList.add(ObjectFactory.createExplosion(col, row, RenderConfigs.BOMB_CENTER));
 
@@ -90,7 +80,11 @@ public class Bomb extends GameObject implements Destroyable {
             };
 
             if (col - i >= Field.MIN_COL && !leftStopped) {
+<<<<<<< HEAD
                 if (i == power || objs[0] instanceof Destroyable || (Game.objectAtPos(col - (i + 1), row) instanceof Wall || col - (i + 1) < Field.MIN_COL)) {
+=======
+                if (i == power || objs[0] instanceof Destroyable || (Game.objectAtPos(col - (i + 1), row) instanceof Wall || col -  (i + 1) < Field.MIN_COL)) {
+>>>>>>> 73cdb4e8360880b6abaca1759ed267d8ae825b35
 
                     spriteFile = RenderConfigs.BOMB_LEFT_END;
                     leftStopped = true;
@@ -108,7 +102,11 @@ public class Bomb extends GameObject implements Destroyable {
             }
 
             if (col + i <= Field.MAX_COL && !rightStopped) {
+<<<<<<< HEAD
                 if (i == power || objs[1] instanceof Destroyable || (Game.objectAtPos(col + (i + 1), row) instanceof Wall || col + (i + 1) > Field.MAX_COL)) {
+=======
+                if (i == power || objs[1] instanceof Destroyable || (Game.objectAtPos(col + (i + 1), row) instanceof Wall || col -  (i + 1) > Field.MAX_COL)) {
+>>>>>>> 73cdb4e8360880b6abaca1759ed267d8ae825b35
 
                     spriteFile = RenderConfigs.BOMB_RIGHT_END;
                     rightStopped = true;
@@ -126,7 +124,11 @@ public class Bomb extends GameObject implements Destroyable {
             }
 
             if (row - i >= Field.MIN_ROW && !upStopped) {
+<<<<<<< HEAD
                 if (i == power || objs[2] instanceof Destroyable || (Game.objectAtPos(col, row - (i + 1)) instanceof Wall || row - (i + 1) < Field.MIN_ROW)) {
+=======
+                if (i == power || objs[2] instanceof Destroyable || (Game.objectAtPos(col, row - (i + 1)) instanceof Wall || row -  (i + 1) > Field.MIN_ROW)) {
+>>>>>>> 73cdb4e8360880b6abaca1759ed267d8ae825b35
 
                     spriteFile = RenderConfigs.BOMB_UP_END;
                     upStopped = true;
@@ -144,7 +146,11 @@ public class Bomb extends GameObject implements Destroyable {
             }
 
             if (row + i <= Field.MAX_ROW && !downStopped) {
+<<<<<<< HEAD
                 if (i == power || objs[3] instanceof Destroyable || (Game.objectAtPos(col, row + (i + 1)) instanceof Wall || row + (i + 1) > Field.MAX_ROW)) {
+=======
+                if (i == power || objs[3] instanceof Destroyable || (Game.objectAtPos(col, row + (i + 1)) instanceof Wall || row +  (i + 1) > Field.MAX_ROW)) {
+>>>>>>> 73cdb4e8360880b6abaca1759ed267d8ae825b35
 
                     spriteFile = RenderConfigs.BOMB_DOWN_END;
                     downStopped = true;
@@ -175,6 +181,7 @@ public class Bomb extends GameObject implements Destroyable {
                 Game.players[1].destroy();
             }
         }
+
 
 
         try {
